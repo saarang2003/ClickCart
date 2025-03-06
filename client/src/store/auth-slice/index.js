@@ -15,3 +15,5 @@ const authSlice = createSlice({
         setUser : (state , action) =>{},
     }
 })
+
+export default authSlice.reducer;
