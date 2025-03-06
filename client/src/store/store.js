@@ -1,1 +1,12 @@
-https://cloud.mongodb.com/v2/67c942403602dd52e2e0e0f8#/streamProcessinghttps://cloud.mongodb.com/v2/67c942403602dd52e2e0e0f8#/streamProcessing
+import  { configureStore } from "@reduxjs/toolkit"
+import authReducer from './auth-slice/index';
+
+
+
+const store = configureStore({
+    reducer : {
+        auth : authReducer
+    }
+})
+
+export default store;
