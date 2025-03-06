@@ -17,6 +17,14 @@ import NotFound from "./pages/not-found/notfound";
 import CheckAuth from "./components/common/check-auth";
 
 function App() {
+
+const isAuthenticated = false;
+const user = {
+  name : "dara",
+  role : "admin"
+}
+
+
   return (
     <div>
       App
@@ -24,7 +32,7 @@ function App() {
         <Route
           path="/auth"
           element={
-            <CheckAuth>
+            <CheckAuth isAuthenticated={isAuthenticated} user={user}>
               <AuthLayout />
             </CheckAuth>
           }
@@ -33,26 +41,24 @@ function App() {
           <Route path="register" element={<AuthRegister />} />
         </Route>
 
-        <Route>
-          <Route
-            path="/admin"
-            element={
-              <CheckAuth>
-                <AdminLayout />
-              </CheckAuth>
-            }
-          >
-            <Route path="dashboard" element={<AdminDashboard />} />
-            <Route path="products" element={<AdminProducts />} />
-            <Route path="orders" element={<AdminOrders />} />
-            <Route path="features" element={<AdminFeatures />} />
-          </Route>
-        </Route>
+        <Route
+  path="/admin"
+  element={
+    <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+      <AdminLayout />
+    </CheckAuth>
+  }
+>
+  <Route path="dashboard" element={<AdminDashboard />} />
+  <Route path="products" element={<AdminProducts />} />
+  <Route path="orders" element={<AdminOrders />} />
+  <Route path="features" element={<AdminFeatures />} />
+</Route>
 
         <Route
           path="/shop"
           element={
-            <CheckAuth>
+            <CheckAuth isAuthenticated={isAuthenticated} user={user}>
               <ShoppingLayout />
             </CheckAuth>
           }
@@ -66,7 +72,7 @@ function App() {
         <Route
           path="*"
           element={
-            <CheckAuth>
+            <CheckAuth isAuthenticated={isAuthenticated} user={user}>
               <NotFound />
             </CheckAuth>
           }

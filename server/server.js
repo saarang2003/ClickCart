@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const connectDb = require('./utils/db.js');
 const cookieParser = require('cookie-parser');
+const authRouter = require('./routes/auth/auth-routes.js');
 // create a 
 
 connectDb();
@@ -27,6 +28,8 @@ app.use(
     })
   );
   
+
+  app.use('/api/auth' , authRouter);
 
 
   app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));
