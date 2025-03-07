@@ -15,14 +15,11 @@ import ShoppingHome from "./pages/shopping-view/home";
 import ShoppingListing from "./pages/shopping-view/listing";
 import NotFound from "./pages/not-found/notfound";
 import CheckAuth from "./components/common/check-auth";
+import { useSelector } from "react-redux";
 
 function App() {
 
-const isAuthenticated = false;
-const user = {
-  name : "dara",
-  role : "admin"
-}
+const {user , isAuthenticated} = useSelector(state => state.auth);
 
 
   return (
