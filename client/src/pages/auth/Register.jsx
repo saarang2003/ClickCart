@@ -1,12 +1,13 @@
 
 
 import CommonForm from "@/components/common/form";
-import { useToast } from "@/components/ui/use-toast";
-import { registerFormControls } from "../../ok/controls/index";
+import { toast } from "sonner"
+import { registerFormControls } from "../../components/controls/index";
 import { registerUser } from "@/store/auth-slice";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+
 
 const initialState = {
   userName: "",
@@ -17,22 +18,17 @@ const initialState = {
 function AuthRegister() {
   const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { toast } = useToast();
+  const navigate = useNavigate(); 
 
   function onSubmit(event) {
     event.preventDefault();
     dispatch(registerUser(formData)).then((data) => {
+      console.log("data sfsc" , data);
       if (data?.payload?.success) {
-        toast({
-          title: data?.payload?.message,
-        });
+        toast.success(data?.payload?.message || "Registration successful!"); // Fallback message
         navigate("/auth/login");
       } else {
-        toast({
-          title: data?.payload?.message,
-          variant: "destructive",
-        });
+        toast.error(data?.payload?.message || "Registration failed."); // Fallback message
       }
     });
   }

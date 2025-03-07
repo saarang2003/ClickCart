@@ -1,6 +1,6 @@
 import CommonForm from "@/components/common/form";
-import { useToast } from "@/components/ui/use-toast";
-import { loginFormControls } from "@/config";
+import { toast } from "sonner";
+import { loginFormControls } from "../../components/controls/index";
 import { loginUser } from "@/store/auth-slice";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -13,22 +13,16 @@ const initialState = {
 
 function AuthLogin() {
   const [formData, setFormData] = useState(initialState);
-  const dispatch = useDispatch();
-  const { toast } = useToast();
+  const dispatch = useDispatch();;
 
   function onSubmit(event) {
     event.preventDefault();
 
     dispatch(loginUser(formData)).then((data) => {
       if (data?.payload?.success) {
-        toast({
-          title: data?.payload?.message,
-        });
+        toast.success(data?.payload?.message || "Login successful!"); // Fallback message
       } else {
-        toast({
-          title: data?.payload?.message,
-          variant: "destructive",
-        });
+        toast.error(data?.payload?.message || "Login failed."); // Fallback message
       }
     });
   }
