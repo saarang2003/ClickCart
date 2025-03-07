@@ -10,6 +10,7 @@ import {toast} from 'sonner';
 import { addProductFormElements } from "../../components/controls/index";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import ProductImageUpload from "../../components/admin-view/image-upload";
 
 const initialFormData = {
   image: null,
@@ -29,6 +30,10 @@ function AdminProduct(){
   useState(false);
 const [formData, setFormData] = useState(initialFormData);
 const dispatch = useDispatch();
+const [imageFile, setImageFile] = useState(null);
+const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+const [imageLoadingState, setImageLoadingState] = useState(false);
+const [currentEditedId, setCurrentEditedId] = useState(null);
 
 
 return (
@@ -44,7 +49,7 @@ return (
             <div key={productItem.id} className="flex flex-col gap-2"
               setFormData={setFormData}
               setOpenCreateProductsDialog={setOpenCreateProductsDialog}
-              // setCurrentEditedId={setCurrentEditedId}
+              setCurrentEditedId={setCurrentEditedId}
               product={productItem}
               // handleDelete={handleDelete}
             />
@@ -55,7 +60,7 @@ return (
       open={openCreateProductsDialog}
       onOpenChange={() => {
         setOpenCreateProductsDialog(false);
-        // setCurrentEditedId(null);
+        setCurrentEditedId(null);
         setFormData(initialFormData);
       }}
     >
