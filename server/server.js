@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const authRouter = require('./routes/auth/auth-routes.js');
 const adminProductsRouter = require('./routes/admin/product-routes.js');
 const shopProductsRouter = require('./routes/shop/products-routes.js');
-
+const  shopCartRouter = require('./routes/shop/cart-routes.js');
 
 
 connectDb();
@@ -36,4 +36,5 @@ app.use(
   app.use('/api/admin/products' , adminProductsRouter)
 
   app.use('/api/shop/products' , shopProductsRouter)
+  app.use("/api/shop/cart", shopCartRouter);
   app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));
