@@ -1,21 +1,21 @@
-import ProductImageUpload from "@/components/admin-view/image-upload";
-import AdminProductTile from "@/components/admin-view/product-tile";
-import CommonForm from "@/components/common/form";
-import { Button } from "@/components/ui/button";
+import ProductImageUpload from "../../components/admin-view/image-upload";
+import AdminProductTile from "../../components/admin-view/product-tile";
+import CommonForm from "../../components/common/form";
+import { Button } from "../../components/ui/button";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
-} from "@/components/ui/sheet";
-import { useToast } from "@/components/ui/use-toast";
-import { addProductFormElements } from "@/config";
+} from "../../components/ui/sheet";
+import {toast} from 'sonner';
+import { addProductFormElements } from "../../components/controls/index";
 import {
   addNewProduct,
   deleteProduct,
   editProduct,
   fetchAllProducts,
-} from "@/store/admin/products-slice";
+} from "../../store/admin/product-slice/index";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -39,11 +39,8 @@ function AdminProducts() {
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const [imageLoadingState, setImageLoadingState] = useState(false);
   const [currentEditedId, setCurrentEditedId] = useState(null);
-
-  const { productList } = useSelector((state) => state.adminProducts);
   const dispatch = useDispatch();
-  const { toast } = useToast();
-
+  const { productList } = useSelector((state) => state.adminProducts);
   function onSubmit(event) {
     event.preventDefault();
 
