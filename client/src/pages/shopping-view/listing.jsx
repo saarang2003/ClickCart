@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ProductFilter from '../../components/shopping-view/filter'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from '../../components/ui/dropdown-menu';
 import {Button} from '../../components/ui/button';
 import { ArrowUpDownIcon } from 'lucide-react';
 import { sortOptions } from '../../components/controls';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllFilteredProducts } from '../../store/shop/product-slice';
 
 function ShoppingListing() {
+    const dispatch = useDispatch();
+    const {productList} = useSelector(state => state.shopProducts) ;
+    
 
   const [filter , setFilter] = useState({});
   const [sort, setSort] = useState(null);
@@ -14,8 +19,16 @@ function ShoppingListing() {
   }
 
 function handleFilter() {
-
 }
+
+
+useEffect(() => {
+  if (sort !== null)
+    dispatch(
+      fetchAllFilteredProducts()
+    );
+}, [dispatch, sort]);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 p-4 md:p-6">
          <ProductFilter filters={filter} handleFilter={handleFilter} />
