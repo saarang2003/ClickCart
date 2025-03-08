@@ -10,8 +10,6 @@ import { fetchAllFilteredProducts } from '../../store/shop/product-slice';
 function ShoppingListing() {
     const dispatch = useDispatch();
     const {productList} = useSelector(state => state.shopProducts) ;
-    
-
   const [filter , setFilter] = useState({});
   const [sort, setSort] = useState(null);
   function handleSort(value) {
@@ -40,13 +38,13 @@ function ShoppingListing() {
     sessionStorage.setItem("filters", JSON.stringify(cpyFilters));
   }
 
-
   useEffect(() => {
     if (filters !== null && sort !== null)
       dispatch(
         fetchAllFilteredProducts({ filterParams: filters, sortParams: sort })
       );
   }, [dispatch, sort, filters]);
+  
 
 useEffect(() => {
   if (sort !== null)
