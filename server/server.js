@@ -5,6 +5,9 @@ const connectDb = require('./utils/db.js');
 const cookieParser = require('cookie-parser');
 const authRouter = require('./routes/auth/auth-routes.js');
 const adminProductsRouter = require('./routes/admin/product-routes.js');
+const shopProductsRouter = require('./routes/shop/products-routes.js');
+
+
 
 connectDb();
 const app = express()
@@ -32,4 +35,5 @@ app.use(
   app.use('/api/auth' , authRouter);
   app.use('/api/admin/products' , adminProductsRouter)
 
+  app.use('/api/shop/products' , shopProductsRouter)
   app.listen(PORT, () => console.log(`Server is now running on port ${PORT}`));
