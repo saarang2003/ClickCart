@@ -9,13 +9,13 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "../../components/ui/dropdown-menu";
-import {toast} from 'sonner'
+import { toast } from "sonner";
 import { sortOptions } from "../../components/controls/index";
-import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
+import { addToCart, fetchCartItems } from "../../store/shop/cart-slice/index";
 import {
   fetchAllFilteredProducts,
   fetchProductDetails,
-} from "@/store/shop/products-slice";
+} from "../../store/shop/product-slice/index";
 import { ArrowUpDownIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
