@@ -1,9 +1,18 @@
-import React from 'react'
+import React from "react";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../components/ui/card";
+import AdminOrdersView from "../../components/admin-view/order";
 
 function AdminOrders() {
   return (
-    <div>AdminOrders</div>
-  )
+   <div>
+    <AdminOrdersView />
+   </div>
+  );
 }
 
-export default AdminOrders
+export default AdminOrders;
