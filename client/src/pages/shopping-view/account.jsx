@@ -1,6 +1,8 @@
 import React from 'react'
 import accImg from '../../assets/account.jpg';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs'
+import Orders from '../../components/shopping-view/orders';
+import Address from '../../components/shopping-view/address';
 
 function ShoppingAccount() {
   return (
@@ -19,7 +21,7 @@ function ShoppingAccount() {
               <TabsTrigger value="address">Address</TabsTrigger>
             </TabsList>
             <TabsContent value="orders">
-              <ShoppingOrders />
+              <Orders/>
             </TabsContent>
             <TabsContent value="address">
               <Address />
