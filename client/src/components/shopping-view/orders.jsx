@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../components/ui/table";
 import { Badge } from "../ui/badge";
 import { Dialog } from "@radix-ui/react-dialog";
+import { Button } from "../ui/button";
+import ShoppingOrderDetailsView from "./order-details";
+import { useDispatch, useSelector } from "react-redux";
 
 function ShoppingOrders() {
+  const [openDetailsDialog , setOpenDetailDialog] = useState(false);
+  const dispatch = useDispatch();
+  const {user} = useSelector((state) => state.auth);
+  const {orderList , orderDetails} = useSelector((state) =>state.shopOrders)
+
+
+
   return (
     <Card>
       <CardHeader>
@@ -52,11 +62,19 @@ function ShoppingOrders() {
                     dispatch(resetOrderDetails());
                   }}
                   >
-
+                    <Button
+                    onClick={() =>
+                      handleFetchOrderDetails(orderItem?._id)
+                    }
+                    >
+                      View Details
+                    </Button>
+                      <ShoppingOrderDetailsView orderDetails={orderDetails} />
                   </Dialog>
                 </TableCell>
               </TableRow>
             ))
+            :null
             }
           </TableBody>
         </Table>
