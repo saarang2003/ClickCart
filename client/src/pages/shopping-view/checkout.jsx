@@ -1,13 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import img from '../../assets/account.jpg'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {toast} from 'sooner';
 
 function ShoppingCheckout() {
     const {cartItems} = useSelector((state) => state.shopCart)
     const {user} = useSelector((state) => state.auth);
-    
+    const [currentSelectedAddress , setCurrentSelectedAddress] = useState(null);
+    const [isPaymentStart , setIsPaymentStart] = useState(false);
+    const dispatch = useDispatch();
+
+
+    console.log(currentSelectedAddress, "cartItems");
+    const totalCartAmount =
+    cartItems && cartItems.items && cartItems.items.length > 0
+      ? cartItems.items.reduce(
+          (sum, currentItem) =>
+            sum +
+            (currentItem?.salePrice > 0
+              ? currentItem?.salePrice
+              : currentItem?.price) *
+              currentItem?.quantity,
+          0
+        )
+      : 0;
 
     function handleInitiatePaypalPayment(){
+
+      if (cartItems.length === 0) {
+        toast({
+          title: "Your cart is empty. Please add items to proceed",
+          variant: "destructive",
+        });
+  
+        return;
+      }
+      if (currentSelectedAddress === null) {
+        toast({
+          title: "Please select one address to proceed.",
+          variant: "destructive",
+        });
+  
+        return;
+      }
 
       const orderData = {
         userId: user?.id,

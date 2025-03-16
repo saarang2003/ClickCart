@@ -17,6 +17,8 @@ import NotFound from "./pages/not-found/notfound";
 import CheckAuth from "./components/common/check-auth";
 import { useDispatch, useSelector } from "react-redux";
 import { checkAuth } from "./store/auth-slice";
+import PaymentReturnPage from "./pages/shopping-view/paypal-return";
+import PaymentSuccessPage from "./pages/shopping-view/paypal-success";
 
 function App() {
 
@@ -72,6 +74,8 @@ if(isLoading) return <div>Loading...</div>
           <Route path="checkout" element={<ShoppingCheckout />} />
           <Route path="home" element={<ShoppingHome />} />
           <Route path="listing" element={<ShoppingListing />} />
+          <Route path="paypal-return" element = {<PaymentReturnPage/>}/>
+          <Route path="paypal-success" element = {<PaymentSuccessPage/>}/>
         </Route>
 
         <Route

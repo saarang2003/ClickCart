@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { capturePayment } from '../../store/shop/order-slice';
 
-function PaypalReturnPage() {
+function PaymentReturnPage() {
 
     const dispatch = useDispatch();
     const location = useLocation();
@@ -37,4 +37,4 @@ function PaypalReturnPage() {
   )
 }
 
-export default PaypalReturnPage
+export default PaymentReturnPage
