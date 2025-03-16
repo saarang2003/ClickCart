@@ -1,8 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Table, TableHead, TableHeader, TableRow } from '../ui/table'
+import { useDispatch, useSelector } from 'react-redux';
+import {toast} from 'sonner';
 
-function AdminOrdersView() {
+
+const initialFormData = {
+  status : "",
+}
+
+function AdminOrdersView({orderDetails}) {
+
+  const [formdata , setFormData] = useState(initialFormData);
+  const {user} = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+    console.log(orderDetails , "orderDetailsorder");
+
+    function handleUpdateStatus(event){
+      event.preventDefault();
+      const {status} = formdata;
+
+      dispatch(
+        updateOrderStatus({
+          id : orderDetails?._id , orderStatus : status
+        })
+      ).then((data) =>{
+        if(data?.payload?.success){
+          dispatch(getOrderDetailsForAdmin(orderDetails._id));
+          dispatch(getAllOrderForAdmin());
+          setFormData(initialFormData)
+        }
+      })
+    }
+
   return (
     <Card>
          <CardHeader>
