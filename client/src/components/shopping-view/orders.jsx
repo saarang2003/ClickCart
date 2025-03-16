@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../components/ui/table";
 import { Badge } from "../ui/badge";
@@ -6,6 +6,7 @@ import { Dialog } from "@radix-ui/react-dialog";
 import { Button } from "../ui/button";
 import ShoppingOrderDetailsView from "./order-details";
 import { useDispatch, useSelector } from "react-redux";
+import { getAllOrderByUserId } from "../../store/shop/order-slice";
 
 function ShoppingOrders() {
   const [openDetailsDialog , setOpenDetailDialog] = useState(false);
@@ -13,6 +14,17 @@ function ShoppingOrders() {
   const {user} = useSelector((state) => state.auth);
   const {orderList , orderDetails} = useSelector((state) =>state.shopOrders)
 
+
+  useEffect(() =>{
+    dispatch(getAllOrderByUserId(user?.id));
+  } , [dispatch]);
+
+
+  console.log(orderDetails , "orderDetails")
+
+  useEffect(() =>{
+    if(orderDetails !== null) setOpenDetailDialog(true);
+  } , [orderDetails]);
 
 
   return (
