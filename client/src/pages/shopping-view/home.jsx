@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import banner1 from "../../assets/banner1.webp";
 import banner2 from "../../assets/banner2.webp";
 import banner3 from "../../assets/banner3.webp";
@@ -7,30 +7,113 @@ import { Card, CardContent } from "../../components/ui/card";
 import { Airplay, BabyIcon, ChevronLeftIcon, ChevronRightIcon, CloudLightning, Heater, Images, Shirt, ShirtIcon, ShoppingBasket, UmbrellaIcon, WashingMachine, WatchIcon } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import ShoppingProductTile from "../../components/shopping-view/product-tile";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import { fetchAllFilteredProducts, fetchProductDetails } from "../../store/shop/product-slice";
+import { addToCart, fetchCartItems } from "../../store/shop/cart-slice";
+
+
+
+
+
+const categoriesWithIcon = [
+  { id: "men", label: "Men", icon: ShirtIcon },
+  { id: "women", label: "Women", icon: CloudLightning },
+  { id: "kids", label: "Kids", icon: BabyIcon },
+  { id: "accessories", label: "Accessories", icon: WatchIcon },
+  { id: "footwear", label: "Footwear", icon: UmbrellaIcon },
+];
+
+const brandsWithIcon = [
+  { id: "nike", label: "Nike", icon: Shirt },
+  { id: "adidas", label: "Adidas", icon: WashingMachine },
+  { id: "puma", label: "Puma", icon: ShoppingBasket },
+  { id: "levi", label: "Levi's", icon: Airplay },
+  { id: "zara", label: "Zara", icon: Images },
+  { id: "h&m", label: "H&M", icon: Heater },
+];
 
 function ShoppingHome() {
-  const categoriesWithIcon = [
-    { id: "men", label: "Men", icon: ShirtIcon },
-    { id: "women", label: "Women", icon: CloudLightning },
-    { id: "kids", label: "Kids", icon: BabyIcon },
-    { id: "accessories", label: "Accessories", icon: WatchIcon },
-    { id: "footwear", label: "Footwear", icon: UmbrellaIcon },
-  ];
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const { productList, productDetails } = useSelector(
+    (state) => state.shopProducts
+  );
+  const { user } = useSelector((state) => state.auth);
 
-  const brandsWithIcon = [
-    { id: "nike", label: "Nike", icon: Shirt },
-    { id: "adidas", label: "Adidas", icon: WashingMachine },
-    { id: "puma", label: "Puma", icon: ShoppingBasket },
-    { id: "levi", label: "Levi's", icon: Airplay },
-    { id: "zara", label: "Zara", icon: Images },
-    { id: "h&m", label: "H&M", icon: Heater },
-  ];
+  const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
 
   const slides = [
     { image: banner1 },
     { image: banner2 },
     { image: banner3 }
   ];
+
+
+    function handleNavigateToListingPage(getCurrentItem , section){
+      sessionStorage.removeItem("filters");
+      const currentFilter = {
+        [section] : [getCurrentItem.id],
+      };
+
+      sessionStorage.setItem("filters" ,JSON.stringify(currentFilter));
+      navigate(`/shop/listing`);
+    }
+
+
+    function handleGetProductDetails(getCurrentProductId){
+      dispatch(fetchProductDetails(getCurrentProductId));
+    }
+
+
+    function handleAddtoCart(getCurrentProductId){
+      dispatch(
+        addToCart({
+          userId : user?.id,
+          productId : getCurrentProductId,
+          quantity : 1 ,
+        })
+      ). then(( data ) =>{
+        if(data?.payload?.success){
+          dispatch(fetchCartItems(user?.id));
+          toast({
+            title : 'Product is added to cart',
+          })
+        }
+      })
+    }
+
+
+    useEffect(() =>{
+      if (productDetails !== null) setOpenDetailsDialog(true);
+    }, [productDetails]);
+
+
+    useEffect(() => {
+      const timer = setInterval(() => {
+        setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+      }, 15000);
+  
+      return () => clearInterval(timer);
+    }, [slides]);
+
+    useEffect(() => {
+      dispatch(
+        fetchAllFilteredProducts({
+          filterParams: {},
+          sortParams: "price-lowtohigh",
+        })
+      );
+    }, [dispatch]);
+
+    console.log(productList, "productList");
+
+
+
 
   return (
     <div className="flex flex-col min-h-screen">

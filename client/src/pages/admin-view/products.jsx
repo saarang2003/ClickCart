@@ -33,7 +33,7 @@ const initialFormData = {
 
 function AdminProducts() {
   const [openCreateProductsDialog, setOpenCreateProductsDialog] =
-    useState(false);useState
+    useState(false);
   const [formData, setFormData] = useState(initialFormData);
   const [imageFile, setImageFile] = useState(null);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
@@ -42,6 +42,7 @@ function AdminProducts() {
   const dispatch = useDispatch();
 
   const { productList } = useSelector((state) => state.adminProducts);
+
   function onSubmit(event) {
     event.preventDefault();
 
