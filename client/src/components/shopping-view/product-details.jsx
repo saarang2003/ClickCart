@@ -4,6 +4,11 @@ import { toast } from "sonner";
 import { Dialog, DialogClose, DialogContent } from "../../components/ui/dialog";
 import { fetchCartItems } from "../../store/shop/cart-slice";
 import { Button } from "../ui/button";
+import { Separator } from '../../components/ui/separator'
+import { Avatar, AvatarFallback } from '../../components/ui/avatar'
+import StarRatingComponent from "../common/star-rating";
+import { Label } from '../../components/ui/label'
+import { Input } from '../../components/ui/input'
 
 function ProductDetailsDialog({ open, setOpen, productDetails }) {
   const [reviewMsg, setReviewMsg] = useState("");
@@ -159,6 +164,59 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
             )}
           </div>
         </div>
+        <Separator />
+        <div className="max-h-[300px] overflow-auto">
+        <h2 className="text-xl font-bold mb-4">Reviews</h2>
+        <div className="grid gap-6">
+        {reviews && reviews.length > 0 ? (
+           reviews.map((reviewItem) => (
+            <div className="flex gap-4">
+               <Avatar className="w-10 h-10 border">
+                      <AvatarFallback>
+                        {reviewItem?.userName[0].toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="grid gap-1">
+                    <div className="flex items-center gap-2">
+                    <h3 className="font-bold">{reviewItem?.userName}</h3>
+                      </div>
+                      <div className="flex items-center gap-0.5">
+                        <StarRatingComponent rating={reviewItem?.reviewValue} />
+                      </div>
+                      <p className="text-muted-foreground">
+                        {reviewItem.reviewMessage}
+                      </p>
+                      </div>
+              </div>
+              ))
+            ) : (
+              <h1>No Reviews</h1>
+            )}
+          </div>
+          <div className="mt-10 flex-col flex gap-2">
+          <Label>Write a review</Label>
+          <div className="flex gap-1">
+          <StarRatingComponent
+                  rating={rating}
+                  handleRatingChange={handleRatingChange}
+                />
+            </div>
+
+            <Input
+                name="reviewMsg"
+                value={reviewMsg}
+                onChange={(event) => setReviewMsg(event.target.value)}
+                placeholder="Write a review..."
+              />
+               <Button
+                onClick={handleAddReview}
+                disabled={reviewMsg.trim() === ""}
+              >
+                Submit
+
+              </Button>
+            </div>
+          </div>
       </DialogContent>
     </Dialog>
   );
