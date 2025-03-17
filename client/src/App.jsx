@@ -58,7 +58,6 @@ function App() {
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="products" element={<AdminProducts />} />
           <Route path="orders" element={<AdminOrders />} />
-          <Route path="features" element={<AdminFeatures />} />
         </Route>
 
         <Route

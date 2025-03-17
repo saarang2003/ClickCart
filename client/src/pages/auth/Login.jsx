@@ -45,7 +45,7 @@ function AuthLogin() {
       </div>
       <CommonForm
         formControls={loginFormControls}
-        buttonText={"Sign In"}
+        buttonText={"Log In"}
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}
