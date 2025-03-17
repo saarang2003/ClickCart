@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import img from '../../assets/account.jpg'
 import { useDispatch, useSelector } from "react-redux";
-import {toast} from 'sooner';
+import {toast} from 'sonner';
 
 function ShoppingCheckout() {
     const {cartItems} = useSelector((state) => state.shopCart)

@@ -21,20 +21,19 @@ import PaymentReturnPage from "./pages/shopping-view/paypal-return";
 import PaymentSuccessPage from "./pages/shopping-view/paypal-success";
 
 function App() {
+  const { user, isAuthenticated, isLoading } = useSelector(
+    (state) => state.auth
+  );
+  const dispatch = useDispatch();
 
-const {user , isAuthenticated , isLoading} = useSelector(state => state.auth);
-const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch]);
 
-useEffect(() =>{
-    dispatch(checkAuth())
-} , [dispatch])
-
-
-if(isLoading) return <div>Loading...</div>
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div>
-      App
       <Routes>
         <Route
           path="/auth"
@@ -49,18 +48,18 @@ if(isLoading) return <div>Loading...</div>
         </Route>
 
         <Route
-  path="/admin"
-  element={
-    <CheckAuth isAuthenticated={isAuthenticated} user={user}>
-      <AdminLayout />
-    </CheckAuth>
-  }
->
-  <Route path="dashboard" element={<AdminDashboard />} />
-  <Route path="products" element={<AdminProducts />} />
-  <Route path="orders" element={<AdminOrders />} />
-  <Route path="features" element={<AdminFeatures />} />
-</Route>
+          path="/admin"
+          element={
+            <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+              <AdminLayout />
+            </CheckAuth>
+          }
+        >
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="products" element={<AdminProducts />} />
+          <Route path="orders" element={<AdminOrders />} />
+          <Route path="features" element={<AdminFeatures />} />
+        </Route>
 
         <Route
           path="/shop"
@@ -74,8 +73,8 @@ if(isLoading) return <div>Loading...</div>
           <Route path="checkout" element={<ShoppingCheckout />} />
           <Route path="home" element={<ShoppingHome />} />
           <Route path="listing" element={<ShoppingListing />} />
-          <Route path="paypal-return" element = {<PaymentReturnPage/>}/>
-          <Route path="paypal-success" element = {<PaymentSuccessPage/>}/>
+          <Route path="paypal-return" element={<PaymentReturnPage />} />
+          <Route path="paypal-success" element={<PaymentSuccessPage />} />
         </Route>
 
         <Route
