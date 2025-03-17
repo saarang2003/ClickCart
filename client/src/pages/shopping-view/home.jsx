@@ -4,18 +4,31 @@ import banner2 from "../../assets/banner2.webp";
 import banner3 from "../../assets/banner3.webp";
 
 import { Card, CardContent } from "../../components/ui/card";
-import { Airplay, BabyIcon, ChevronLeftIcon, ChevronRightIcon, CloudLightning, Heater, Images, Shirt, ShirtIcon, ShoppingBasket, UmbrellaIcon, WashingMachine, WatchIcon } from "lucide-react";
+import {
+  Airplay,
+  BabyIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  CloudLightning,
+  Heater,
+  Images,
+  Shirt,
+  ShirtIcon,
+  ShoppingBasket,
+  UmbrellaIcon,
+  WashingMachine,
+  WatchIcon,
+} from "lucide-react";
 import { Button } from "../../components/ui/button";
 import ShoppingProductTile from "../../components/shopping-view/product-tile";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { fetchAllFilteredProducts, fetchProductDetails } from "../../store/shop/product-slice";
+import {
+  fetchAllFilteredProducts,
+  fetchProductDetails,
+} from "../../store/shop/product-slice";
 import { addToCart, fetchCartItems } from "../../store/shop/cart-slice";
-
-
-
-
 
 const categoriesWithIcon = [
   { id: "men", label: "Men", icon: ShirtIcon },
@@ -45,89 +58,76 @@ function ShoppingHome() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
 
-  const slides = [
-    { image: banner1 },
-    { image: banner2 },
-    { image: banner3 }
-  ];
+  const slides = [{ image: banner1 }, { image: banner2 }, { image: banner3 }];
 
+  function handleNavigateToListingPage(getCurrentItem, section) {
+    sessionStorage.removeItem("filters");
+    const currentFilter = {
+      [section]: [getCurrentItem.id],
+    };
 
-    function handleNavigateToListingPage(getCurrentItem , section){
-      sessionStorage.removeItem("filters");
-      const currentFilter = {
-        [section] : [getCurrentItem.id],
-      };
+    sessionStorage.setItem("filters", JSON.stringify(currentFilter));
+    navigate(`/shop/listing`);
+  }
 
-      sessionStorage.setItem("filters" ,JSON.stringify(currentFilter));
-      navigate(`/shop/listing`);
-    }
+  function handleGetProductDetails(getCurrentProductId) {
+    dispatch(fetchProductDetails(getCurrentProductId));
+  }
 
-
-    function handleGetProductDetails(getCurrentProductId){
-      dispatch(fetchProductDetails(getCurrentProductId));
-    }
-
-
-    function handleAddtoCart(getCurrentProductId){
-      dispatch(
-        addToCart({
-          userId : user?.id,
-          productId : getCurrentProductId,
-          quantity : 1 ,
-        })
-      ). then(( data ) =>{
-        if(data?.payload?.success){
-          dispatch(fetchCartItems(user?.id));
-          toast({
-            title : 'Product is added to cart',
-          })
-        }
+  function handleAddtoCart(getCurrentProductId) {
+    dispatch(
+      addToCart({
+        userId: user?.id,
+        productId: getCurrentProductId,
+        quantity: 1,
       })
-    }
+    ).then((data) => {
+      if (data?.payload?.success) {
+        dispatch(fetchCartItems(user?.id));
+        toast({
+          title: "Product is added to cart",
+        });
+      }
+    });
+  }
 
+  useEffect(() => {
+    if (productDetails !== null) setOpenDetailsDialog(true);
+  }, [productDetails]);
 
-    useEffect(() =>{
-      if (productDetails !== null) setOpenDetailsDialog(true);
-    }, [productDetails]);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+    }, 15000);
 
+    return () => clearInterval(timer);
+  }, [slides]);
 
-    useEffect(() => {
-      const timer = setInterval(() => {
-        setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
-      }, 15000);
-  
-      return () => clearInterval(timer);
-    }, [slides]);
+  useEffect(() => {
+    dispatch(
+      fetchAllFilteredProducts({
+        filterParams: {},
+        sortParams: "price-lowtohigh",
+      })
+    );
+  }, [dispatch]);
 
-    useEffect(() => {
-      dispatch(
-        fetchAllFilteredProducts({
-          filterParams: {},
-          sortParams: "price-lowtohigh",
-        })
-      );
-    }, [dispatch]);
-
-    console.log(productList, "productList");
-
-
-
+  console.log(productList, "productList");
 
   return (
     <div className="flex flex-col min-h-screen">
       <div className="relative w-full h-[600px] overflow-hidden">
-      {slides.map((slide, index) => (
-  <img
-    src={slide?.image}
-    alt={`Slide ${index}`} // Always good to include alt text for accessibility
-    key={index}
-    className={`${
-      index === currentSlide ? "opacity-100" : "opacity-0"
-    } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
-  />
-))}
+        {slides.map((slide, index) => (
+          <img
+            src={slide?.image}
+            alt={`Slide ${index}`} // Always good to include alt text for accessibility
+            key={index}
+            className={`${
+              index === currentSlide ? "opacity-100" : "opacity-0"
+            } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
+          />
+        ))}
 
         <Button
           variant="outline"
@@ -135,8 +135,8 @@ function ShoppingHome() {
           onClick={() =>
             setCurrentSlide(
               (prevSlide) =>
-                (prevSlide - 1 + featureImageList.length) %
-                featureImageList.length
+                (prevSlide - 1 + slides.length) %
+                slides.length
             )
           }
           className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/80"
@@ -149,7 +149,7 @@ function ShoppingHome() {
           size="icon"
           onClick={() =>
             setCurrentSlide(
-              (prevSlide) => (prevSlide + 1) % featureImageList.length
+              (prevSlide) => (prevSlide + 1) % slides.length
             )
           }
           className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/80"
@@ -181,6 +181,8 @@ function ShoppingHome() {
           </div>
         </div>
       </section>
+
+
 
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -221,6 +223,8 @@ function ShoppingHome() {
           </div>
         </div>
       </section>
+
+
       <ProductDetailsDialog
         open={openDetailsDialog}
         setOpen={setOpenDetailsDialog}
