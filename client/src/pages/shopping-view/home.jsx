@@ -29,6 +29,7 @@ import {
   fetchProductDetails,
 } from "../../store/shop/product-slice";
 import { addToCart, fetchCartItems } from "../../store/shop/cart-slice";
+import ProductDetailsDialog from "../../components/shopping-view/product-details";
 
 const categoriesWithIcon = [
   { id: "men", label: "Men", icon: ShirtIcon },
