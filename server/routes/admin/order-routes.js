@@ -1,15 +1,14 @@
 const express = require('express');
 
+const { getAllOrdersOfAllUsers, getOrderDetailsForAdmin, updateOrderStatus } = require('../../controllers/admin/order-controller');
+
 
 const router = express.Router();
 
-const { createOrder, capturePayment, getAllOrderByUser, getOrderDetails } = require('../../controllers/admin/order-controller');
+router.get("/get", getAllOrdersOfAllUsers);
+router.get("/details/:id", getOrderDetailsForAdmin);
+router.put("/update/:id", updateOrderStatus);
 
-
-router.post('/create' , createOrder);
-router.post('/capture' , capturePayment);
-router.get('/list/:userId' , getAllOrderByUser );
-router.get('/details/:userId' ,getOrderDetails);
 
 
 module.exports = router;

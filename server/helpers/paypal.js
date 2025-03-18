@@ -20,7 +20,7 @@ const paypal = require('@paypal/paypal-server-sdk')
 //       },
 //       logResponse: {
 //         logHeaders: true
-//       }
+//       }https://github.com/sangammukherjee/mern-ecommerce-2024/tree/master/server/routes/shop
 //     },
 //   });
 
