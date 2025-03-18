@@ -18,6 +18,8 @@ export const addNewAddress = createAsyncThunk(
   }
 );
 
+
+
 export const fetchAllAddresses = createAsyncThunk(
   "/addresses/fetchAllAddresses",
   async (userId) => {
@@ -28,6 +30,8 @@ export const fetchAllAddresses = createAsyncThunk(
     return response.data;
   }
 );
+
+
 
 export const editaAddress = createAsyncThunk(
   "/addresses/editaAddress",
