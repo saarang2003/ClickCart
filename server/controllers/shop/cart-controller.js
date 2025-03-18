@@ -52,6 +52,8 @@ const addToCart = async (req, res) => {
   };
   
 
+
+  // very improtant 
   const fetchCartItems = async (req, res) => {
     try {
       const { userId } = req.params;
@@ -110,7 +112,7 @@ const addToCart = async (req, res) => {
   };
   
 
-
+// very important 
   const updateCartItemQty = async (req, res) => {
     try {
       const { userId, productId, quantity } = req.body;
