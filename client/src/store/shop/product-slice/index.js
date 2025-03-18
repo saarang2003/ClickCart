@@ -29,7 +29,6 @@ const initialState = {
     }
   );
 
-
   export const fetchProductDetails = createAsyncThunk(
     "/products/fetchProductDetails",
     async (id) => {
