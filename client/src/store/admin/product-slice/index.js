@@ -6,7 +6,7 @@ const initialState = {
   productList: [],
 };
 
-// Thunks for async operations
+
 export const addNewProduct = createAsyncThunk(
   "/products/addnewproduct",
   async (formData) => {
@@ -19,9 +19,12 @@ export const addNewProduct = createAsyncThunk(
         },
       }
     );
-    return result?.data; // This will be returned as the payload
+
+    return result?.data;
   }
 );
+
+
 
 export const fetchAllProducts = createAsyncThunk(
   "/products/fetchAllProducts",
@@ -29,9 +32,12 @@ export const fetchAllProducts = createAsyncThunk(
     const result = await axios.get(
       "http://localhost:5000/api/admin/products/get"
     );
-    return result?.data; // Return the data
+
+    return result?.data;
   }
 );
+
+
 
 export const editProduct = createAsyncThunk(
   "/products/editProduct",
@@ -45,9 +51,12 @@ export const editProduct = createAsyncThunk(
         },
       }
     );
-    return result?.data; // Return the updated product
+
+    return result?.data;
   }
 );
+
+
 
 export const deleteProduct = createAsyncThunk(
   "/products/deleteProduct",
@@ -55,49 +64,27 @@ export const deleteProduct = createAsyncThunk(
     const result = await axios.delete(
       `http://localhost:5000/api/admin/products/delete/${id}`
     );
-    return result?.data; // Return the result of delete operation
+
+    return result?.data;
   }
 );
 
-// Admin products slice
 const AdminProductsSlice = createSlice({
   name: "adminProducts",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Handling fetchAllProducts
       .addCase(fetchAllProducts.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(fetchAllProducts.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.productList = action.payload.data; // Populate productList with the fetched products
+        state.productList = action.payload.data;
       })
-      .addCase(fetchAllProducts.rejected, (state) => {
+      .addCase(fetchAllProducts.rejected, (state, action) => {
         state.isLoading = false;
-        state.productList = []; // Reset to empty array if fetch fails
-      })
-      
-      // Handling addNewProduct (after adding a product)
-      .addCase(addNewProduct.fulfilled, (state, action) => {
-        state.productList.push(action.payload); // Add the newly added product to the list
-      })
-      
-      // Handling editProduct (after editing a product)
-      .addCase(editProduct.fulfilled, (state, action) => {
-        const updatedProduct = action.payload;
-        state.productList = state.productList.map((product) =>
-          product.id === updatedProduct.id ? updatedProduct : product
-        ); // Replace the old product with the updated one
-      })
-      
-      // Handling deleteProduct (after deleting a product)
-      .addCase(deleteProduct.fulfilled, (state, action) => {
-        const deletedProductId = action.payload.id;
-        state.productList = state.productList.filter(
-          (product) => product.id !== deletedProductId
-        ); // Remove the deleted product from the list
+        state.productList = [];
       });
   },
 });
