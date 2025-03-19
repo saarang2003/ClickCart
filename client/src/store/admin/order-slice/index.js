@@ -1,4 +1,3 @@
-// shoping order lsice same as shop view compoenent 
 
 
 
@@ -9,7 +8,7 @@ import axios from 'axios';
 
 const initialState = {
     orderList : [],
-    orderDetails : nulll,
+    orderDetails : null,
 }
 
 
@@ -82,4 +81,4 @@ export const updateOrderStatus = createAsyncThunk(
 
   export const  { resetOrderDetails } =  adminOrderSlice.actions;
 
-  export default adminOrderSlice;
+  export default adminOrderSlice.reducer;
