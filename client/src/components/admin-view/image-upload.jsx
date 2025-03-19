@@ -16,6 +16,7 @@ function ProductImageUpload({
   isEditMode,
   isCustomStyling = false,
 }) {
+
   const inputRef = useRef(null);
 
   console.log(isEditMode, "isEditMode");
@@ -64,6 +65,8 @@ function ProductImageUpload({
   useEffect(() => {
     if (imageFile !== null) uploadImageToCloudinary();
   }, [imageFile]);
+
+  
 
   return (
     <div
