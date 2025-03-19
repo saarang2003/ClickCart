@@ -16,7 +16,7 @@ function PaymentReturnPage() {
 
     useEffect(() =>{
         if(paymentId && payerId){
-            const currentOrderId = JSON.parse(sessionStorage.getItem('currentOrderId'));
+            const orderId = JSON.parse(sessionStorage.getItem('currentOrderId'));
 
             dispatch(capturePayment({paymentId , orderId , payerId})).then(data =>{
                 if(data?.payload?.success){
