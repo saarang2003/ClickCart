@@ -12,7 +12,7 @@ const shopProductsRouter = require('./routes/shop/products-routes.js');
 const  shopCartRouter = require('./routes/shop/cart-routes.js');
 const shopAddressRouter = require('./routes/shop/address-routes.js');
 const shopOrderRouter = require('./routes/shop/order-routes.js');
-const shopSearchRouter =- require('./routes/shop/search-routes.js');
+const shopSearchRouter = require('./routes/shop/search-routes.js');
 const shopReviewRouter = require('./routes/shop/review-route.js');
 
 connectDb();
