@@ -2,21 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../components/ui/table";
 import { Badge } from "../ui/badge";
-import { Dialog } from "@radix-ui/react-dialog";
+import { Dialog } from "../ui/dialog";
 import { Button } from "../ui/button";
 import ShoppingOrderDetailsView from "./order-details";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllOrderByUserId } from "../../store/shop/order-slice";
+import { getAllOrderByUserId, getAllOrdersByUserId, resetOrderDetails } from "../../store/shop/order-slice";
 
 function ShoppingOrders() {
   const [openDetailsDialog , setOpenDetailDialog] = useState(false);
   const dispatch = useDispatch();
   const {user} = useSelector((state) => state.auth);
-  const {orderList , orderDetails} = useSelector((state) =>state.shopOrders)
+  const {orderList , orderDetails} = useSelector((state) =>state.shopOrder)
 
 
   useEffect(() =>{
-    dispatch(getAllOrderByUserId(user?.id));
+    dispatch(getAllOrdersByUserId(user?.id));
   } , [dispatch]);
 
 
@@ -30,7 +30,7 @@ function ShoppingOrders() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>All Orders</CardTitle>
+      <CardTitle>Order History</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
