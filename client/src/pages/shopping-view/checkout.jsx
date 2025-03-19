@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import img from '../../assets/account.jpg'
+import img from '../../assets/account.jpg';
+import UserCartItemsContent from "../../components/shopping-view/cart-items-wrapper";
+import Address from '../../components/shopping-view/address';
 import { useDispatch, useSelector } from "react-redux";
 import {toast} from 'sonner';
+import { Button } from "../../components/ui/button";
 
 function ShoppingCheckout() {
     const {cartItems} = useSelector((state) => state.shopCart)
     const {user} = useSelector((state) => state.auth);
+    const {approvalURL} = useSelector((state) =>state.shopOrder)
     const [currentSelectedAddress , setCurrentSelectedAddress] = useState(null);
     const [isPaymentStart , setIsPaymentStart] = useState(false);
     const dispatch = useDispatch();
 
 
     console.log(currentSelectedAddress, "cartItems");
+
     const totalCartAmount =
     cartItems && cartItems.items && cartItems.items.length > 0
       ? cartItems.items.reduce(
@@ -74,6 +79,19 @@ function ShoppingCheckout() {
         paymentId: "",
         payerId: "",
       };
+
+      dispatch(createNewOrder(orderData)).then((data) => {
+        console.log(data, "sarang");
+        if (data?.payload?.success) {
+          setIsPaymentStart(true);
+        } else {
+          setIsPaymentStart(false);
+        }
+      });
+    }
+
+    if (approvalURL) {
+      window.location.href = approvalURL;
     }
 
   return (
