@@ -6,6 +6,7 @@ import {
   SheetTitle,
 } from "../../components/ui/sheet";
 import { Button } from "../ui/button";
+import UserCartItemsContent from "./cart-items-wrapper";
 
 function UserCartWrapper({ cartItems, setOpenCartSheet }) {
   const navigate = useNavigate();
