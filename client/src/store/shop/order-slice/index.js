@@ -22,7 +22,7 @@ export const createNewOrder = createAsyncThunk(
       orderData
     );
 
-    return response.data;
+    return response?.data;
   }
 );
 

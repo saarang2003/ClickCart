@@ -1,55 +1,59 @@
-// const { Client } = require('@paypal/paypal-server-sdk');
+// helpers/paypal.js
+const axios = require('axios');
 
-// // A mock database to simulate saving and loading tokens
-// const tokenDatabase = {};
+// PayPal API credentials
+const CLIENT_ID = 'ASZVY1BZywDrfihtmQJ5ircCE4Qvvz4L94GyksMn8rhrxSJMdRwxt17i4hzOKyOEGPilNlpndIpOQHWS';
+const CLIENT_SECRET = 'EEZlL1895Wd2rJlNCAq84MCI-ggN--BpZwRLnAQ0Ku2MVcbzo8R29B7TTnUbvdnr_YWZe45sjuouSy7I';
+const BASE_URL = 'https://api-m.sandbox.paypal.com'; // Use sandbox for testing
 
-// // Function to save the updated token to the database
-// const saveTokenToDatabase = (token) => {
-//   tokenDatabase.token = token; // Save the new token in our mock database
-//   console.log("Token saved to database:", token);
-// };
-
-// // Function to load the token from the database
-// const loadTokenFromDatabase = () => {
-//   return tokenDatabase.token; // Fetch the token from the mock database
-// };
-
-// // Create the PayPal Client with OAuth token update callback and token provider
-// const client = new Client({
-//   // Client ID and Client Secret should be added here
-//   clientId: 'ASZVY1BZywDrfihtmQJ5ircCE4Qvvz4L94GyksMn8rhrxSJMdRwxt17i4hzOKyOEGPilNlpndIpOQHWS',
-//   clientSecret: 'EEZlL1895Wd2rJlNCAq84MCI-ggN--BpZwRLnAQ0Ku2MVcbzo8R29B7TTnUbvdnr_YWZe45sjuouSy7I',
-
-//   // OAuth token update callback: Save the token when it gets updated
-//   oAuthOnTokenUpdate: (token) => {
-//     saveTokenToDatabase(token); // Save the updated token to the database
-//   },
-
-//   // Custom OAuth token provider
-//   oAuthTokenProvider: (lastOAuthToken, authManager) => {
-//     // If the last token exists, use it; otherwise, fetch a new one
-//     const storedToken = loadTokenFromDatabase();
+// Get access token
+const getAccessToken = async () => {
+  try {
+    const response = await axios({
+      url: `${BASE_URL}/v1/oauth2/token`,
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      auth: {
+        username: CLIENT_ID,
+        password: CLIENT_SECRET,
+      },
+      data: 'grant_type=client_credentials',
+    });
     
-//     if (storedToken) {
-//       console.log("Using stored token from the database:", storedToken);
-//       return storedToken; // Return the stored token if available
-//     } else {
-//       console.log("Fetching new token...");
-//       // Fetch a new token using the authManager if no stored token exists or it's expired
-//       return authManager.fetchToken();
-//     }
-//   }
-// });
+    return response.data.access_token;
+  } catch (error) {
+    console.error('Error getting PayPal access token:', error.message);
+    throw new Error('Failed to get PayPal access token');
+  }
+};
 
-// module.exports = client;
+// Create an order
+const createOrder = async (orderData) => {
+  try {
+    const accessToken = await getAccessToken();
+    
+    const response = await axios({
+      url: `${BASE_URL}/v2/checkout/orders`,
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+        'PayPal-Request-Id': `order-${Date.now()}`, // Generate a unique ID
+        'Prefer': 'return=representation'
+      },
+      data: orderData
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error('Error creating PayPal order:', error.response?.data || error.message);
+    throw new Error('Failed to create PayPal order');
+  }
+};
 
-const {Client} = require('@paypal/paypal-server-sdk');
-
-const client = new Client({
-    clientCredentialsAuthCredentials : {
-           oAuthClientId: 'ASZVY1BZywDrfihtmQJ5ircCE4Qvvz4L94GyksMn8rhrxSJMdRwxt17i4hzOKyOEGPilNlpndIpOQHWS',
-    oAuthClientSecret: 'EEZlL1895Wd2rJlNCAq84MCI-ggN--BpZwRLnAQ0Ku2MVcbzo8R29B7TTnUbvdnr_YWZe45sjuouSy7I',
-    }
-});
-
-module.exports = client;
+module.exports = {
+  createOrder
+};
