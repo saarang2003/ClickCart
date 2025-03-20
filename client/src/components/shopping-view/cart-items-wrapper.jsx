@@ -24,7 +24,7 @@ function UserCartItemsContent({ cartItem }) {
           (product) => product._id === getCartItem?.productId
         );
 
-        const getTotalStock = productList[getCurrentProductIndex].totalStock;
+        const getTotalStock = productList[getCurrentProductIndex]?.totalStock;
 
         console.log(getCurrentProductIndex, getTotalStock, "getTotalStock");
 
