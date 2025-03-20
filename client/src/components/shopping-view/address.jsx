@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { addNewAddress, editaAddress, fetchAllAddresses } from '../../store/shop/address-slice/index'
 import AddressCard from './address-card';
+import {addressFormControls} from '../controls/index'
 import CommonForm from '../common/form';
 
 
@@ -47,9 +49,9 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
           dispatch(fetchAllAddresses(user?.id));
           setCurrentEditedId(null);
           setFormData(initialAddressFormData);
-          toast({
-            title: "Address updated successfully",
-          });
+          toast( "Address updated successfully");
+        }else{
+          toast( "Error updated address");
         }
       })
       : dispatch(
@@ -61,9 +63,7 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
         if (data?.payload?.success) {
           dispatch(fetchAllAddresses(user?.id));
           setFormData(initialAddressFormData);
-          toast({
-            title: "Address added successfully",
-          });
+          toast( "Address added successfully");
         }
       });
 }
@@ -74,9 +74,7 @@ function handleDeleteAddress(getCurrentAddress) {
   ).then((data) => {
     if (data?.payload?.success) {
       dispatch(fetchAllAddresses(user?.id));
-      toast({
-        title: "Address deleted successfully",
-      });
+      toast( "Address deleted successfully");
     }
   });
 }
@@ -113,8 +111,9 @@ console.log(addressList, "addressList");
     <Card>
         <div className="mb-5 p-3 grid grid-cols-1 sm:grid-cols-2  gap-2">
         {addressList && addressList.length > 0
-            ? addressList.map((singleAddressItem) => (  
-              <AddressCard
+            ? addressList.map((singleAddressItem , index) => (  
+              <AddressCard 
+              key={index}
               selectedId={selectedId}
               handleDeleteAddress={handleDeleteAddress}
               addressInfo={singleAddressItem}
@@ -131,15 +130,16 @@ console.log(addressList, "addressList");
         </CardHeader>
 
         <CardContent className="space-y-3">
-          <CommonForm
-           formControls={addressFormControls}
-           formData={formData}
-           setFormData={setFormData}
-           buttonText={currentEditedId !== null ? "Edit" : "Add"}
-           onSubmit={handleManageAddress}
-           isBtnDisabled={!isFormValid()}
-          />
-        </CardContent>
+  <CommonForm 
+    formControls={addressFormControls}
+    formData={formData}
+    setFormData={setFormData}
+    buttonText={currentEditedId !== null ? "Edit" : "Add"}
+    onSubmit={handleManageAddress}
+    isBtnDisabled={!isFormValid()}
+  />
+</CardContent>
+
     </Card>
   )
 }
