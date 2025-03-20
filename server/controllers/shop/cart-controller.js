@@ -52,16 +52,14 @@ const addToCart = async (req, res) => {
   };
   
 
-
-  // very improtant 
-  const fetchCartItems = async (req, res) => {
+const fetchCartItems = async (req, res) => {
     try {
       const { userId } = req.params;
   
       if (!userId) {
         return res.status(400).json({
           success: false,
-          message: "User id is manadatory!",
+          message: "User id is mandatory!",
         });
       }
   
