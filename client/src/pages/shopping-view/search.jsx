@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'sonner';
 import { Input } from '../../components/ui/input';
 import ShoppingProductTile from '../../components/shopping-view/product-tile';
 import ProductDetailsDialog from '../../components/shopping-view/product-details';
+import { getSearchResults, resetSearchResults } from '../../store/shop/search-slice/index'
 
 
 function SearchProducts() {

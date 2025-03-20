@@ -38,7 +38,7 @@ const initialState = {
         })
         .addCase(getSearchResults.fulfilled, (state, action) => {
           state.isLoading = false;
-          state.searchResults = action.payload.data;
+          state.searchResults = action?.payload?.data;
         })
         .addCase(getSearchResults.rejected, (state) => {
           state.isLoading = false;

@@ -8,7 +8,7 @@ const searchProducts = async(req,res) =>{
 
         const {keyword} = req.params;
 
-        if(!keyword || typeof Keyword !== "string"){
+        if(!keyword || typeof keyword !== "string"){
             return res.status(404).json({
                 success : false,
                 message : "Please enter a keyword"
@@ -28,7 +28,7 @@ const searchProducts = async(req,res) =>{
 
         const searchResults = await Product.find(createSearchQuery);
 
-        re.status(200).json({
+        res.status(200).json({
             success : true,
             data : searchResults
         })
