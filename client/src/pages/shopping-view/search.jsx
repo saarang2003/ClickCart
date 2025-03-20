@@ -8,6 +8,25 @@ import ProductDetailsDialog from '../../components/shopping-view/product-details
 import { getSearchResults, resetSearchResults } from '../../store/shop/search-slice/index'
 
 
+
+// function useDebounce(value, delay) {
+//   const [debouncedValue, setDebouncedValue] = useState(value);
+
+//   useEffect(() => {
+//     // Set a timeout to update debounced value after the delay
+//     const handler = setTimeout(() => {
+//       setDebouncedValue(value);
+//     }, delay);
+
+//     // Cleanup function to clear the timeout if the value changes before the delay
+//     return () => {
+//       clearTimeout(handler);
+//     };
+//   }, [value, delay]);
+
+//   return debouncedValue;
+// }
+
 function SearchProducts() {
     const [keyword, setKeyword] = useState("");
     const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
@@ -33,6 +52,21 @@ function SearchProducts() {
       }, [keyword]);
 
 
+        // Use the debounce hook
+  // const debouncedKeyword = useDebounce(keyword, 1000); // Debounce with 1000ms delay
+
+  // useEffect(() => {
+  //   // Use debouncedKeyword, not the original keyword
+  //   if (debouncedKeyword && debouncedKeyword.trim() !== '' && debouncedKeyword.trim().length > 3) {
+  //     // Perform the API call with the debounced keyword
+  //     setSearchParams(new URLSearchParams(`?keyword=${debouncedKeyword}`)); // Use debouncedKeyword for setting params
+  //     dispatch(getSearchResults(debouncedKeyword));
+  //   } else if (debouncedKeyword.trim() === '') {
+  //     // Reset search results when debouncedKeyword is empty
+  //     setSearchParams(new URLSearchParams('?keyword=')); // Clearing the keyword in the URL
+  //     dispatch(resetSearchResults());
+  //   }
+  // }, [debouncedKeyword, dispatch, setSearchParams]);
 
       function handleAddtoCart(getCurrentProductId, getTotalStock) {
         console.log(cartItems);

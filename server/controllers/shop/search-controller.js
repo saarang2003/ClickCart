@@ -15,7 +15,7 @@ const searchProducts = async(req,res) =>{
             })
         }
 
-        const regEx = new RegExp(keyword , 'i');
+        const regEx = new RegExp(keyword.toLowerCase(), 'i');
 
         const createSearchQuery = {
             $or : [
@@ -27,6 +27,8 @@ const searchProducts = async(req,res) =>{
         }
 
         const searchResults = await Product.find(createSearchQuery);
+        console.log("searchResults" , searchResults);
+
 
         res.status(200).json({
             success : true,
