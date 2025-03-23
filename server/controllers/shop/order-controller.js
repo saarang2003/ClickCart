@@ -31,7 +31,7 @@ const createOrder = async (req, res) => {
         value: item.price.toFixed(2),
       },
       quantity: item.quantity,
-      category: "PHYSICAL_GOODS"
+      category: "DIGITAL_GOODS"
     }));
 
     const itemTotal = cartItems.reduce(

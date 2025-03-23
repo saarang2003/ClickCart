@@ -85,9 +85,12 @@ function ShoppingCheckout() {
       });
     }
 
-    if (approvalURL) {
-      window.location.href = approvalURL;
-    }
+
+    useEffect(() => {
+      if (approvalURL) {
+          window.location.href = approvalURL; // Redirect to PayPal for approval
+      }
+  }, [approvalURL]);
 
   return (
     <div className="flex flex-col">

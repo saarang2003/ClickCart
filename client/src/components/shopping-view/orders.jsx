@@ -6,7 +6,7 @@ import { Dialog } from "../ui/dialog";
 import { Button } from "../ui/button";
 import ShoppingOrderDetailsView from "./order-details";
 import { useDispatch, useSelector } from "react-redux";
-import {  getAllOrdersByUserId, resetOrderDetails } from "../../store/shop/order-slice";
+import {  getAllOrdersByUserId, getOrderDetails, resetOrderDetails } from "../../store/shop/order-slice";
 
 function ShoppingOrders() {
   const [openDetailsDialog , setOpenDetailDialog] = useState(false);
@@ -18,6 +18,10 @@ function ShoppingOrders() {
   useEffect(() =>{
     dispatch(getAllOrdersByUserId(user?.id));
   } , [dispatch]);
+
+  function handleFetchOrderDetails(getId){
+    dispatch(getOrderDetails(getId));
+  }
 
 
   console.log(orderDetails , "orderDetails")
