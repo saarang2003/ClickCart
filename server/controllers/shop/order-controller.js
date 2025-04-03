@@ -32,11 +32,6 @@ const createOrder = async (req, res) => {
       quantity: item.quantity,
     }));
 
-    // Calculate total order value
-    const totalValue = cartItems.reduce(
-      (acc, item) => acc + item.price * item.quantity,
-      0
-    ).toFixed(2);
 
     // Make request to PayPal API to create an order
     const { data } = await axios.post(
@@ -51,7 +46,7 @@ const createOrder = async (req, res) => {
               breakdown: {
                 item_total: {
                   currency_code: "USD",
-                  value: totalValue,
+                  value: totalAmount,
                 },
               },
             },
@@ -108,7 +103,7 @@ const createOrder = async (req, res) => {
       orderStatus,
       paymentMethod,
       paymentStatus,
-      totalAmount: parseFloat(totalValue),
+      totalAmount: parseFloat(totalAmount),
       orderDate,
       orderUpdateDate,
       paymentId,
