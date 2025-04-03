@@ -107,7 +107,7 @@ function ShoppingCheckout() {
         }
       } catch (error) {
         console.error("Order creation error:", error);
-        toast("Error creating order: " + (error.message || "Unknown error"));
+        toast("Error creating order: which process " + (error.message || "Unknown error"));
         return null;
       } finally {
         setIsLoading(false);
