@@ -64,21 +64,46 @@ function ShoppingCheckout() {
       }
 
       setIsLoading(true);
+
+
+      // cart: [
+      //   {
+      //     id: "dummy123",
+      //     name: "Test Product",
+      //     price: 100.0,
+      //     quantity: 1,
+      //   },
+      //   {
+      //     id: "3422",
+      //     name: "Testing",
+      //     price: 1030.0,
+      //     quantity: 3,
+      //   },
+      // ],
       
+     const cartItems =  cartItems.items.map((singleCartItem) => ({
+        productId: singleCartItem?.productId,
+        title: singleCartItem?.title,
+        image: singleCartItem?.image,
+        price:
+          singleCartItem?.salePrice > 0
+            ? singleCartItem?.salePrice
+            : singleCartItem?.price,
+        quantity: singleCartItem?.quantity,
+      }));
+
+
       try {
         const orderData = {
           userId: user?.id,
           cartId: cartItems?._id,
-          cartItems: cartItems.items.map((singleCartItem) => ({
-            productId: singleCartItem?.productId,
-            title: singleCartItem?.title,
-            image: singleCartItem?.image,
-            price:
-              singleCartItem?.salePrice > 0
-                ? singleCartItem?.salePrice
-                : singleCartItem?.price,
-            quantity: singleCartItem?.quantity,
-          })),
+          cart : cartItems.map((item) =>({
+            id : item.productId,
+            name : item.title,
+            price : item.price,
+            quantity : item.quantity
+          }))
+          ,
           addressInfo: {
             addressId: currentSelectedAddress?._id,
             address: currentSelectedAddress?.address,
@@ -121,7 +146,7 @@ function ShoppingCheckout() {
         console.log("Order ID from state:", orderId);
         
         // Redirect to your return page with the payment information
-        window.location.href = `/shop/payment-return?paymentId=${data.paymentID}&payerId=${data.payerID}&orderId=${orderId}`;
+        window.location.href = `/shop/payment-return`;
       } catch (error) {
         console.error("Payment approval error:", error);
         setMessage(`Transaction failed. Error: ${error.message}`);
