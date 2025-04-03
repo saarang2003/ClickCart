@@ -3,6 +3,9 @@
 
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
+dotenv.config();
+
+
 
 
 const initialState = {
@@ -18,7 +21,7 @@ export const createNewOrder = createAsyncThunk(
   "/order/createNewOrder",
   async (orderData) => {
     const response = await axios.post(
-      "http://localhost:5000/api/shop/order/create",
+      `${process.env.REACT_APP_API_BASE_URL}/shop/order/create`,
       orderData
     );
 
@@ -31,7 +34,7 @@ export const capturePayment = createAsyncThunk(
   "/order/capturePayment",
   async ({ paymentId, payerId, orderId }) => {
     const response = await axios.post(
-      "http://localhost:5000/api/shop/order/capture",
+      `${process.env.REACT_APP_API_BASE_URL}/shop/order/capture`,
       {
         paymentId,
         payerId,
@@ -47,7 +50,7 @@ export const getAllOrdersByUserId = createAsyncThunk(
   "/order/getAllOrdersByUserId",
   async (userId) => {
     const response = await axios.get(
-      `http://localhost:5000/api/shop/order/list/${userId}`
+      `${process.env.REACT_APP_API_BASE_URL}/shop/order/${userId}`
     );
 
     return response.data;
@@ -58,7 +61,7 @@ export const getOrderDetails = createAsyncThunk(
   "/order/getOrderDetails",
   async (id) => {
     const response = await axios.get(
-      `http://localhost:5000/api/shop/order/details/${id}`
+      `${process.env.REACT_APP_API_BASE_URL}/shop/order/${id}`
     );
 
     return response.data;
