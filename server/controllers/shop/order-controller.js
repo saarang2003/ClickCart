@@ -135,19 +135,6 @@ const createOrder = async (req, res) => {
 };
 
 
-app.post("/api/orders", async (req, res) => {
-  try {
-    const { cart } = req.body;
-    if (!cart || cart.length === 0) {
-      return res.status(400).json({ error: "Cart cannot be empty" });
-    }
-    const order = await createOrder(cart);
-    res.json({ orderID: order.id });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
 
 const createPayment = async(req,res) =>{
     try{
