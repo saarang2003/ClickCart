@@ -112,6 +112,7 @@ const createOrder = async (req, res) => {
       (link) => link.rel === "approve"
     )?.href;
 
+    console.log("aoorocaada" , approvalURL);
     if (!approvalURL) {
       console.error("Error: Approval URL not found");
       return res.status(500).json({

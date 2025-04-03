@@ -128,11 +128,12 @@ function ShoppingCheckout() {
       }
     };
 
-    useEffect(() => {
-      if (approvalURL) {
-        window.location.href = approvalURL;
-      }
-    }, [approvalURL]);
+
+    // useEffect(() => {
+    //   if (approvalURL) {
+    //     window.location.href = approvalURL;
+    //   }
+    // }, [approvalURL]);
 
     return (
       <div className="flex flex-col">
@@ -159,9 +160,9 @@ function ShoppingCheckout() {
             <div className="mt-4 w-full">
               <PayPalScriptProvider options={initialOptions}>
                 <PayPalButtons
+                  style={{ shape: "rect", layout: "vertical", color: "gold", label: "paypal" }}
                   createOrder={createOrder}
                   onApprove={onApprove}
-                  style={{ shape: "rect", layout: "vertical", color: "gold", label: "paypal" }}
                   disabled={isLoading}
                 />
               </PayPalScriptProvider>
