@@ -165,13 +165,33 @@ const createPayment = async(req,res) =>{
     }
 }
 
+const captureOrder = async (orderID) => {
+  const accessToken = await generateAccessToken();
+  try {
+    const { data } = await axios.post(
+      `${PAYPAL_API}/v2/checkout/orders/${orderID}/capture`,
+      {},
+      { headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" } }
+    );
+    return data;
+  } catch (error) {
+    console.error("PayPal Capture Order Error:", error.response?.data || error.message);
+    throw new Error("Error capturing PayPal order");
+  }
+};
 
 
 const capturePayment = async (req, res) => {
   try {
-    const { paymentId, payerId, orderId } = req.body;
+    const { paymentId, payerId, orderID } = req.body;
 
-    let order = await Order.findById(orderId);
+    if (!orderID) {
+      return res.status(400).json({ error: "Order ID is required" });
+    }
+    const captureResponse = await captureOrder(orderID);
+    res.json(captureResponse);
+
+    let order = await Order.findById(orderID);
 
     if (!order) {
       return res.status(404).json({
