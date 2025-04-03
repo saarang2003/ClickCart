@@ -24,6 +24,7 @@ export const createNewOrder = createAsyncThunk(
       orderData
     );
 
+    console.log("response id" , response?.data);
     return response?.data;
   }
 );
