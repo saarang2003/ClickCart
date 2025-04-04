@@ -39,13 +39,70 @@ const createOrder = async (req, res) => {
       sku: item.productId,
       unit_amount: {
         currency_code: "USD",
-        value: parseFloat(item.price).toFixed(2),
+        value: Number(parseFloat(item.price).toFixed(2)),
       },
       quantity: item.quantity,
     }));
 
     // Calculate total value from items
     const totalValue = parseFloat(totalAmount).toFixed(2);
+
+
+        // Make request to PayPal API to create an order
+        const { data } = await axios.post(
+          `${PAYPAL_API}/v2/checkout/orders`,
+          {
+            intent: "CAPTURE",
+            purchase_units: [
+              {
+                amount: {
+                  currency_code: "USD",
+                  value: totalValue,
+                  breakdown: {
+                    item_total: {
+                      currency_code: "USD",
+                      value: totalValue,
+                    },
+                  },
+                },
+                items: items,
+              },
+            ],
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+    
+        console.log("PayPal order creation response:", data);
+    
+        // Check if the response contains data and links
+        if (!data || !data.links) {
+          console.error("Error creating PayPal order: Missing links");
+          return res.status(500).json({
+            success: false,
+            message: "Error while creating PayPal payment",
+          });
+        }
+    
+
+        
+    // Extract approval URL from the response
+    const approvalURL = data.links.find(
+      (link) => link.rel === "approve"
+    )?.href;
+
+    console.log("aoorocaada" , approvalURL);
+    if (!approvalURL) {
+      console.error("Error: Approval URL not found");
+      return res.status(500).json({
+        success: false,
+        message: "Error finding PayPal approval URL",
+      });
+    }
 
     // Create a new order in our database first
     const newlyCreatedOrder = new Order({
@@ -68,59 +125,7 @@ const createOrder = async (req, res) => {
 
     console.log("Order created in database with ID:", newlyCreatedOrder._id);
 
-    // Make request to PayPal API to create an order
-    const { data } = await axios.post(
-      `${PAYPAL_API}/v2/checkout/orders`,
-      {
-        intent: "CAPTURE",
-        purchase_units: [
-          {
-            amount: {
-              currency_code: "USD",
-              value: totalValue,
-              breakdown: {
-                item_total: {
-                  currency_code: "USD",
-                  value: totalValue,
-                },
-              },
-            },
-            items: items,
-          },
-        ],
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
 
-    console.log("PayPal order creation response:", data);
-
-    // Check if the response contains data and links
-    if (!data || !data.links) {
-      console.error("Error creating PayPal order: Missing links");
-      return res.status(500).json({
-        success: false,
-        message: "Error while creating PayPal payment",
-      });
-    }
-
-    // Extract approval URL from the response
-    const approvalURL = data.links.find(
-      (link) => link.rel === "approve"
-    )?.href;
-
-    console.log("aoorocaada" , approvalURL);
-    if (!approvalURL) {
-      console.error("Error: Approval URL not found");
-      return res.status(500).json({
-        success: false,
-        message: "Error finding PayPal approval URL",
-      });
-    }
 
     // Update our order with PayPal's order ID
     newlyCreatedOrder.paymentId = data.id;

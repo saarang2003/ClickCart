@@ -30,6 +30,9 @@ function ShoppingCheckout() {
     };
 
     // Calculate total without the *10 error
+
+
+
     const totalCartAmount =
       cartItems && cartItems.items && cartItems.items.length > 0
         ? cartItems.items.reduce(
@@ -45,12 +48,12 @@ function ShoppingCheckout() {
 
     function handleInitiatePaypalPayment() {
       if (!cartItems || !cartItems.items || cartItems.items.length === 0) {
-        toast("Your cart is empty. Please add items to proceed");
+        toast.error("Your cart is empty. Please add items to proceed");
         return false;
       }
       
       if (currentSelectedAddress === null) {
-        toast("Please select one address to proceed.");
+        toast.error("Please select one address to proceed.");
         return false;
       }
       
@@ -65,23 +68,7 @@ function ShoppingCheckout() {
 
       setIsLoading(true);
 
-
-      // cart: [
-      //   {
-      //     id: "dummy123",
-      //     name: "Test Product",
-      //     price: 100.0,
-      //     quantity: 1,
-      //   },
-      //   {
-      //     id: "3422",
-      //     name: "Testing",
-      //     price: 1030.0,
-      //     quantity: 3,
-      //   },
-      // ],
-      
-     const cartItems =  cartItems.items.map((singleCartItem) => ({
+     const formattedCartItems  =  cartItems?.items?.map((singleCartItem) => ({
         productId: singleCartItem?.productId,
         title: singleCartItem?.title,
         image: singleCartItem?.image,
@@ -93,11 +80,12 @@ function ShoppingCheckout() {
       }));
 
 
+
       try {
         const orderData = {
           userId: user?.id,
           cartId: cartItems?._id,
-          cart : cartItems.map((item) =>({
+          cart : formattedCartItems?.map((item) =>({
             id : item.productId,
             name : item.title,
             price : item.price,
@@ -127,12 +115,12 @@ function ShoppingCheckout() {
           // Return the orderId from your backend
           return result.orderId;
         } else {
-          toast("Failed to create order: " + (result.message || "Unknown error"));
+          toast.error("Failed to create order: " + (result.message || "Unknown error"));
           return null;
         }
       } catch (error) {
         console.error("Order creation error:", error);
-        toast("Error creating order: which process " + (error.message || "Unknown error"));
+        toast.error("Error creating order: which process " + (error.message || "Unknown error"));
         return null;
       } finally {
         setIsLoading(false);
@@ -171,8 +159,8 @@ function ShoppingCheckout() {
             setCurrentSelectedAddress={setCurrentSelectedAddress}
           />
           <div className="flex flex-col gap-4">
-            {cartItems && cartItems.items && cartItems.items.length > 0
-              ? cartItems.items.map((item, ind) => (
+            {cartItems && cartItems?.items && cartItems?.items?.length > 0
+              ? cartItems?.items?.map((item, ind) => (
                   <UserCartItemsContent key={ind} cartItem={item} />
                 ))
               : null}
