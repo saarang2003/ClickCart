@@ -29,10 +29,7 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
     event.preventDefault();
     if (addressList.length >= 3 && currentEditedId === null) {
       setFormData(initialAddressFormData);
-      toast({
-        title: "You can add max 3 addresses",
-        variant: "destructive",
-      });
+      toast.error("You can add max 3 addresses");
 
       return;
     }
@@ -49,9 +46,9 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
           dispatch(fetchAllAddresses(user?.id));
           setCurrentEditedId(null);
           setFormData(initialAddressFormData);
-          toast( "Address updated successfully");
+          toast.success( "Address updated successfully");
         }else{
-          toast( "Error updated address");
+          toast.error( "Error updated address");
         }
       })
       : dispatch(
@@ -63,7 +60,7 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
         if (data?.payload?.success) {
           dispatch(fetchAllAddresses(user?.id));
           setFormData(initialAddressFormData);
-          toast( "Address added successfully");
+          toast.success( "Address added successfully");
         }
       });
 }
@@ -74,7 +71,7 @@ function handleDeleteAddress(getCurrentAddress) {
   ).then((data) => {
     if (data?.payload?.success) {
       dispatch(fetchAllAddresses(user?.id));
-      toast( "Address deleted successfully");
+      toast.success( "Address deleted successfully");
     }
   });
 }
