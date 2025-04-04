@@ -137,6 +137,7 @@ const items = cart.map((item) => ({
       success: true,
       approvalURL,
       orderId: newlyCreatedOrder._id,
+      paypalOrderId : data.id
     });
   } catch (error) {
     console.error("PayPal Order Creation Error:", error.response?.data || error.message);
@@ -149,7 +150,7 @@ const items = cart.map((item) => ({
 
 const capturePayment = async (req, res) => {
   try {
-    const { paymentId, payerId, orderId } = req.body;
+    const { paypalOrderId, payerId, orderId } = req.body;
 
     if (!orderId) {
       return res.status(400).json({ 
@@ -173,7 +174,7 @@ const capturePayment = async (req, res) => {
 
     // Capture the payment with PayPal
     const { data } = await axios.post(
-      `${PAYPAL_API}/v2/checkout/orders/${paymentId}/capture`,
+      `${PAYPAL_API}/v2/checkout/orders/${paypalOrderId}/capture`,
       {},
       { 
         headers: { 
@@ -188,7 +189,7 @@ const capturePayment = async (req, res) => {
     // Update our order with payment details
     order.paymentStatus = "paid";
     order.orderStatus = "confirmed";
-    order.paymentId = paymentId;
+    order.paymentId = paypalOrderId;  // storing PayPal Order ID here
     order.payerId = payerId;
 
     // Update product stock
@@ -212,7 +213,7 @@ const capturePayment = async (req, res) => {
     }
 
     // Remove the cart after successful payment
-    if (order.cartId) {
+    if (order?.cartId) {
       await Cart.findByIdAndDelete(order.cartId);
     }
 

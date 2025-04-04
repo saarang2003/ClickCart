@@ -21,8 +21,8 @@ export const createNewOrder = createAsyncThunk(
                 orderData
             );
             
-            console.log("Order creation response:", response.data);
-            return response.data;
+            console.log("Order creation response from axios:", response?.data);
+            return response?.data;
         } catch (error) {
             console.error("Order creation error:", error);
             return rejectWithValue(error.response?.data || { message: error.message });
@@ -32,18 +32,18 @@ export const createNewOrder = createAsyncThunk(
 
 export const capturePayment = createAsyncThunk(
     "/order/capturePayment",
-    async ({ paymentId, payerId, orderId }, { rejectWithValue }) => {
+    async ({ paypalOrderId, payerId, orderId }, { rejectWithValue }) => {
         try {
             const response = await axios.post(
                 `http://localhost:5000/api/shop/order/capture`,
                 {
-                    paymentId,
+                    paypalOrderId,
                     payerId,
                     orderId,
                 }
             );
-            
-            return response.data;
+            console.log("capture response from axios:", response?.data);
+            return response?.data;
         } catch (error) {
             console.error("Payment capture error:", error);
             return rejectWithValue(error.response?.data || { message: error.message });

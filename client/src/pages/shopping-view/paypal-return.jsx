@@ -15,11 +15,11 @@ function PaymentReturnPage() {
         async function handlePayment() {
             try {
                 const params = new URLSearchParams(location.search);
-                const paymentId = params.get('paymentId');
-                const payerId = params.get('payerId');
+                const paypalOrderId = params.get('token'); // ← the PayPal Order ID
+                const payerId = params.get('PayerID');
                 const orderId = params.get('orderId') || JSON.parse(sessionStorage.getItem('currentOrderId'));
                 
-                console.log("Payment details:", { paymentId, payerId, orderId });
+                console.log("Payment details:", { paypalOrderId, payerId, orderId });
                 
                 if (!paymentId || !payerId || !orderId) {
                     throw new Error("Missing payment information");
@@ -37,7 +37,7 @@ function PaymentReturnPage() {
                     // Clear the order ID from session storage
                     sessionStorage.removeItem('currentOrderId');
                     // Redirect to success page
-                    navigate("/shop/payment-success");
+                    navigate("/shop/paypal-success");
                 } else {
                     throw new Error(result.message || "Payment capture failed");
                 }

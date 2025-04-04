@@ -112,8 +112,8 @@ function ShoppingCheckout() {
         console.log("Order creation result:", result);
         
         if (result.success) {
-          // Return the orderId from your backend
-          return result.orderId;
+          // Return the orderId from your backend ( i need to return orderId from paypal )
+          return result.paypalOrderId;
         } else {
           toast.error("Failed to create order: " + (result.message || "Unknown error"));
           return null;
@@ -134,7 +134,7 @@ function ShoppingCheckout() {
         console.log("Order ID from state:", orderId);
         
         // Redirect to your return page with the payment information
-        window.location.href = `/shop/payment-return`;
+        window.location.href = `/shop/paypal-return`;
       } catch (error) {
         console.error("Payment approval error:", error);
         setMessage(`Transaction failed. Error: ${error.message}`);
