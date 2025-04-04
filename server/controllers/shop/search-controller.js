@@ -16,6 +16,8 @@ const searchProducts = async(req,res) =>{
         }
 
         const regEx = new RegExp(keyword.toLowerCase(), 'i');
+        // const regEx = new RegExp(keyword, "i");
+
 
         const createSearchQuery = {
             $or : [
