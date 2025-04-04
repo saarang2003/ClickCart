@@ -15,7 +15,7 @@ const getFilteredProducts = async (req, res) => {
     }
 
 
-    // sortihn
+    // sorting according to mongodb 
     let sort = {};
 
     switch (sortBy) {
