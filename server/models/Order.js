@@ -1,14 +1,13 @@
 const mongoose = require("mongoose");
 
 const OrderSchema = new mongoose.Schema({
-  userId: String,
+  userId: { type: String, required: true },
   cartId: String,
-  cartItems: [
+  cart: [
     {
-      productId: String,
-      title: String,
-      image: String,
-      price: String,
+      id: String,
+      name: String,
+      price: Number,
       quantity: Number,
     },
   ],

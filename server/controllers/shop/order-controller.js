@@ -11,7 +11,7 @@ const createOrder = async (req, res) => {
   try {
     const {
       userId,
-      cartItems,
+      cart, // Changed from cartItems
       addressInfo,
       orderStatus,
       paymentMethod,
@@ -23,7 +23,7 @@ const createOrder = async (req, res) => {
     } = req.body;
 
     // Validate required fields
-    if (!userId || !cartItems || !addressInfo || !totalAmount) {
+    if (!userId || !cart || !addressInfo || !totalAmount) {
       return res.status(400).json({
         success: false,
         message: "Missing required order information",
@@ -34,15 +34,16 @@ const createOrder = async (req, res) => {
     const accessToken = await generateAccessToken();
 
     // Map cart items for PayPal API
-    const items = cartItems.map((item) => ({
-      name: item.title,
-      sku: item.productId,
-      unit_amount: {
-        currency_code: "USD",
-        value: Number(parseFloat(item.price).toFixed(2)),
-      },
-      quantity: item.quantity,
-    }));
+ // Update the items mapping for PayPal
+const items = cart.map((item) => ({
+  name: item.name,
+  sku: item.id,
+  unit_amount: {
+    currency_code: "USD",
+    value: Number(parseFloat(item.price).toFixed(2)),
+  },
+  quantity: item.quantity,
+}));
 
     // Calculate total value from items
     const totalValue = parseFloat(totalAmount).toFixed(2);
@@ -108,7 +109,7 @@ const createOrder = async (req, res) => {
     const newlyCreatedOrder = new Order({
       userId,
       cartId,
-      cartItems,
+      cart,
       addressInfo,
       orderStatus,
       paymentMethod,
@@ -191,7 +192,7 @@ const capturePayment = async (req, res) => {
     order.payerId = payerId;
 
     // Update product stock
-    for (let item of order.cartItems) {
+    for (let item of order?.cart) {
       let product = await Product.findById(item.productId);
 
       if (!product) {
