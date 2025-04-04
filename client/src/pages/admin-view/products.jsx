@@ -73,12 +73,21 @@ function AdminProducts() {
             setOpenCreateProductsDialog(false);
             setImageFile(null);
             setFormData(initialFormData);
-            toast({
-              title: "Product add successfully",
-            });
+            toast( "Product add successfully");
           }
         });
   }
+
+  function shuffleArray(array) {
+    if (!Array.isArray(array)) return [];
+    const shuffled = [...array]; // Create a copy to avoid mutating the original array
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+  
 
   function handleDelete(getCurrentProductId) {
     dispatch(deleteProduct(getCurrentProductId)).then((data) => {
@@ -110,7 +119,7 @@ function AdminProducts() {
       </div>
       <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
         {productList && productList.length > 0
-          ? productList.map((productItem) => (
+          ? shuffleArray(productList).map((productItem) => (
               <AdminProductTile
                 setFormData={setFormData}
                 setOpenCreateProductsDialog={setOpenCreateProductsDialog}

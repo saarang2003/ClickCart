@@ -24,6 +24,20 @@ export const addNewProduct = createAsyncThunk(
   }
 );
 
+// const shuffleArray = (array) => {
+//   if (!Array.isArray(array)) {
+//     console.error("shuffleArray: Input is not an array", array);
+//     return [];
+//   }
+//   console.log("Shuffling array:", array);
+
+//   // Fisher-Yates Shuffle Algorithm
+//   for (let i = array.length - 1; i > 0; i--) {
+//     const j = Math.floor(Math.random() * (i + 1));
+//     [array[i], array[j]] = [array[j], array[i]];
+//   }
+//   return array;
+// };
 
 
 export const fetchAllProducts = createAsyncThunk(
@@ -32,10 +46,12 @@ export const fetchAllProducts = createAsyncThunk(
     const result = await axios.get(
       "http://localhost:5000/api/admin/products/get"
     );
+    console.log("result" ,result)
 
-    return result?.data;
+  return result?.data;
   }
 );
+
 
 
 
@@ -79,8 +95,9 @@ const AdminProductsSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchAllProducts.fulfilled, (state, action) => {
+        console.log("Final Products in Store:", action.payload);
         state.isLoading = false;
-        state.productList = action.payload.data;
+        state.productList = action.payload?.data;
       })
       .addCase(fetchAllProducts.rejected, (state, action) => {
         state.isLoading = false;

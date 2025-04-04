@@ -14,6 +14,8 @@ const getFilteredProducts = async (req, res) => {
       filters.brand = { $in: brand.split(",") };
     }
 
+
+    // sortihn
     let sort = {};
 
     switch (sortBy) {
