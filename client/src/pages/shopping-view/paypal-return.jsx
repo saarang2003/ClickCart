@@ -14,7 +14,7 @@ function PaymentReturnPage() {
     useEffect(() => {
         async function handlePayment() {
             try {
-                const params = new URLSearchParams(location.search);
+                const params = new URLSearchParams(window.location.search);
                 const paypalOrderId = params.get('token'); // ← the PayPal Order ID
                 const payerId = params.get('PayerID');
                 const orderId = params.get('orderId') || JSON.parse(sessionStorage.getItem('currentOrderId'));

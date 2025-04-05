@@ -134,7 +134,8 @@ function ShoppingCheckout() {
         console.log("Order ID from state:", orderId);
         
         // Redirect to your return page with the payment information
-        window.location.href = `/shop/paypal-return`;
+        window.location.href = `/shop/paypal-return?token=${data.orderID}&PayerID=${data.payerID}&orderId=${orderId}`;
+
       } catch (error) {
         console.error("Payment approval error:", error);
         setMessage(`Transaction failed. Error: ${error.message}`);
