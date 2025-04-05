@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/card';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { capturePayment } from '../../store/shop/order-slice';
+import { capturePayment } from '../../store/shop/order-slice';    
+import { useRef } from "react";
 
 function PaymentReturnPage() {
     const dispatch = useDispatch();
@@ -10,33 +11,35 @@ function PaymentReturnPage() {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [processing, setProcessing] = useState(true);
+    const hasRun = useRef(false);
     
     useEffect(() => {
+        if (hasRun.current) return;
+        hasRun.current = true;
+    
         async function handlePayment() {
             try {
                 const params = new URLSearchParams(window.location.search);
-                const paypalOrderId = params.get('token'); // ← the PayPal Order ID
-                const payerId = params.get('PayerID');
-                const orderId = params.get('orderId') || JSON.parse(sessionStorage.getItem('currentOrderId'));
-                
+                const paypalOrderId = params.get("token");
+                const payerId = params.get("PayerID");
+                const orderId = params.get("orderId") || JSON.parse(sessionStorage.getItem("currentOrderId"));
+    
                 console.log("Payment details:", { paypalOrderId, payerId, orderId });
-                
+    
                 if (!paypalOrderId || !payerId || !orderId) {
                     throw new Error("Missing payment information");
                 }
-                
+    
                 const result = await dispatch(capturePayment({
-                    paypalOrderId, 
-                    payerId, 
+                    paypalOrderId,
+                    payerId,
                     orderId
                 })).unwrap();
-                
+    
                 console.log("Payment capture result:", result);
-                
+    
                 if (result.success) {
-                    // Clear the order ID from session storage
-                    sessionStorage.removeItem('currentOrderId');
-                    // Redirect to success page
+                    sessionStorage.removeItem("currentOrderId");
                     navigate("/shop/paypal-success");
                 } else {
                     throw new Error(result.message || "Payment capture failed");
@@ -47,9 +50,10 @@ function PaymentReturnPage() {
                 setProcessing(false);
             }
         }
-        
+    
         handlePayment();
     }, [dispatch, location.search, navigate]);
+    
 
 
     useEffect(() => {
