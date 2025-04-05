@@ -130,7 +130,7 @@ const shoppingOrderSlice = createSlice({
             })
             .addCase(capturePayment.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.payload?.message || "Failed to capture payment";
+                state.error = action.payload?.message || "Payment capture failed";
             })
             
             // Get Orders List

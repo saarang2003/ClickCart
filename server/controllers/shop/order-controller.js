@@ -191,12 +191,20 @@ const capturePayment = async (req, res) => {
     order.paymentId = paypalOrderId;  // storing PayPal Order ID here
     order.payerId = payerId;
 
+    if (order.paymentStatus === "paid") {
+      return res.status(200).json({
+        success: true,
+        message: "Payment already captured",
+        data: order,
+      });
+    }
+
     // Update product stock
     for (let item of order?.cart) {
-      let product = await Product.findById(item.productId);
+      let product = await Product.findById(item?.id);
 
       if (!product) {
-        console.warn(`Product not found: ${item.productId}`);
+        console.warn(`Product not found: ${item?.id}`);
         continue;
       }
 
@@ -213,7 +221,7 @@ const capturePayment = async (req, res) => {
 
     // Remove the cart after successful payment
     if (order?.cartId) {
-      await Cart.findByIdAndDelete(order.cartId);
+      await Cart.findByIdAndDelete(order?.cartId);
     }
 
     await order.save();
