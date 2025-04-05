@@ -21,12 +21,12 @@ function PaymentReturnPage() {
                 
                 console.log("Payment details:", { paypalOrderId, payerId, orderId });
                 
-                if (!paymentId || !payerId || !orderId) {
+                if (!paypalOrderId || !payerId || !orderId) {
                     throw new Error("Missing payment information");
                 }
                 
                 const result = await dispatch(capturePayment({
-                    paymentId, 
+                    paypalOrderId, 
                     payerId, 
                     orderId
                 })).unwrap();
@@ -50,6 +50,11 @@ function PaymentReturnPage() {
         
         handlePayment();
     }, [dispatch, location.search, navigate]);
+
+
+    useEffect(() => {
+        console.log("Redirected URL:", window.location.href);
+      }, []);
 
     return (
         <Card className="max-w-md mx-auto my-8">
