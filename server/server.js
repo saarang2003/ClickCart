@@ -39,8 +39,9 @@ app.use(
   
 
   app.use('/api/auth' , authRouter);
-  app.use('/api/admin/products' , adminProductsRouter)
-  app.use('/api/auth/orders' , adminOrderRouter);
+  app.use('/api/admin/products' , adminProductsRouter);
+  app.use('/api/admin/orders' , adminOrderRouter);
+
 
   app.use('/api/shop/products' , shopProductsRouter)
   app.use("/api/shop/cart", shopCartRouter);

@@ -30,6 +30,29 @@ function AdminOrdersView() {
     dispatch(resetOrderDetails());
   };
 
+  function getStatusBadgeColor(status) {
+    switch (status) {
+      case "confirmed":
+        return "bg-green-500";
+      case "rejected":
+        return "bg-red-600";
+      case "pending":
+        return "bg-orange-500";
+      case "inShipping":
+        return "bg-blue-600";
+      case "delivered":
+        return "bg-green-700";
+      default:
+        return "bg-gray-500";
+    }
+  }
+
+  console.log("Full order list:", orderList.map((item , ind) =>{
+    {item?.orderStatus}
+  }));
+
+  console.log("Full order list:", orderList);
+
   return (
     <Card>
       <CardHeader>
@@ -56,7 +79,7 @@ function AdminOrdersView() {
                     <TableCell>{orderItem._id}</TableCell>
                     <TableCell>{orderItem.orderDate.split('T')[0]}</TableCell>
                     <TableCell>
-                      <Badge
+                      {/* <Badge
                         className={`py-1 px-3 ${
                           orderItem.orderStatus === 'confirmed'
                             ? 'bg-green-500'
@@ -66,7 +89,12 @@ function AdminOrdersView() {
                         }`}
                       >
                         {orderItem.orderStatus}
-                      </Badge>
+                      </Badge> */}
+
+
+<Badge className={`py-1 px-3 text-white capitalize ${getStatusBadgeColor(orderItem?.orderStatus)}`}>
+  {orderItem?.orderStatus }
+</Badge>
                     </TableCell>
                     <TableCell>${orderItem.totalAmount}</TableCell>
                     <TableCell>
@@ -76,7 +104,7 @@ function AdminOrdersView() {
                     </TableCell>
                   </TableRow>
                 ))
-              : null}
+              : null }
           </TableBody>
         </Table>
       </CardContent>
