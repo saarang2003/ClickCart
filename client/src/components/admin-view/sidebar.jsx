@@ -58,7 +58,7 @@ function AdminSideBar({ open, setOpen }) {
   return (
     <Fragment>
       {/* mobile vew  */}
-      <Sheet open={open} onOpenChange={setOpen}>
+      <Sheet  open={open} onOpenChange={setOpen}>
         <SheetContent side="left" className="w-64">
           <div className="flex flex-col h-full">
             <SheetHeader className="border-b ">
@@ -73,7 +73,7 @@ function AdminSideBar({ open, setOpen }) {
       </Sheet>
 
       {/* desktop view  */}
-      <aside className="hidden w-64 flex-col border-r bg-background p-6 lg:flex">
+      <aside className="hidden w-64 rounded-2xl flex-col border-r bg-background p-6 lg:flex">
         <div
           onClick={() => navigate("/admin/dashboard")}
           className="flex cursor-pointer items-center gap-2"
