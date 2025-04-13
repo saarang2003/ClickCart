@@ -1,4 +1,4 @@
-import { BadgeDollarSign, BellPlus, CalendarDays } from 'lucide-react';
+import { BadgeDollarSign, BellPlus, CalendarDays, ListOrdered, ShoppingCart, Truck } from 'lucide-react';
 import React from 'react'
 import { useSelector } from 'react-redux'
 
@@ -13,6 +13,20 @@ function AdminDashboard() {
     year: 'numeric',
   });
 
+
+  const StatCard = ({ icon, title, value }) => {
+    return (
+      <div className='flex h-[100px] justify-around items-center p-6 border  shadow-md rounded-lg'>
+        <div className='w-[50px] h-[50px] p-2 bg-gray-300/40 border shadow-md rounded-full flex justify-center items-center'>
+          {icon}
+        </div>
+        <div className='flex flex-col gap-2'>
+          <p className='font-bold'>{title}</p>
+          <p className='text-2xl'>{value}</p>
+        </div>
+      </div>
+    );
+  };
 
 
 
@@ -39,7 +53,7 @@ function AdminDashboard() {
 
 
 <div className='grid grid-cols-1 md :grid-cols-3 lg:grid-cols-4 gap-3 w-full p-4 '>
-<div className='flex h-[100px] justify-around items-center p-6 border-1 border-gray-800/40 shadow-md rounded-lg'>
+{/* <div className='flex h-[100px] justify-around items-center p-6 border-1 border-gray-800/40 shadow-md rounded-lg'>
 <div className='w-[50px] h-[50px] p-2 bg-gray-300/40 border shadow-md rounded-full flex justify-center items-center '>
   <BadgeDollarSign />
 </div>
@@ -47,39 +61,19 @@ function AdminDashboard() {
   <p className='font-bold'>Total Products</p>
   <p className='text-2xl'>250$</p>
   </div>
+</div> */}
+  <StatCard icon={<BadgeDollarSign />} title="Total Products" value="250$" />
+  <StatCard icon={<ShoppingCart />} title="Orders Today" value="18" />
+  <StatCard icon={<Truck />} title="Pending Deliveries" value="5" />
+  <StatCard icon={<ListOrdered />} title="Pending Orders" value="45" />
 </div>
 
-<div className='flex h-[100px] justify-around items-center p-6 border-1 border-gray-800/40 shadow-md rounded-lg'>
-<div className='w-[50px] h-[50px] p-2 bg-gray-300/40 border  shadow-md rounded-full flex justify-center items-center '>
-  <BadgeDollarSign />
-</div>
-  <div className='flex flex-col align-start gap-2'>
-  <p className='font-bold'>Total Products</p>
-  <p className='text-2xl'>250$</p>
+<div className='mt-3 min-h-screen mb-2 border-b rounded-2xl w-full p-6 border-2 shadow-sm border-gray-300/20'>
+  <div className='flex justify-evenly p-4 gap-3 '>
+    <div>
+    <h3>Your Sales Report </h3>
+    </div>
   </div>
-</div>
-
-
-<div className='flex h-[100px] justify-around items-center p-6 border-1 border-gray-800/40 shadow-md rounded-lg'>
-<div className='w-[50px] h-[50px] p-2 bg-gray-300/40 border shadow-md rounded-full flex justify-center items-center '>
-  <BadgeDollarSign />
-</div>
-  <div className='flex flex-col align-start gap-2'>
-  <p className='font-bold'>Total Products</p>
-  <p className='text-2xl'>250$</p>
-  </div>
-</div>
-
-
-<div className='flex h-[100px] justify-around items-center p-6 border-1 border-gray-800/40 shadow-md rounded-lg'>
-<div className='w-[50px] h-[50px] p-2 bg-gray-300/40 border shadow-md rounded-full flex justify-center items-center '>
-  <BadgeDollarSign />
-</div>
-  <div className='flex flex-col align-start gap-2'>
-  <p className='font-bold'>Total Products</p>
-  <p className='text-2xl'>250$</p>
-  </div>
-</div>
 </div>
 
 
