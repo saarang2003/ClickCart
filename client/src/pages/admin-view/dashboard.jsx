@@ -1,11 +1,21 @@
-import { BadgeDollarSign, BellPlus, CalendarDays, ListOrdered, ShoppingCart, Truck } from 'lucide-react';
-import React from 'react'
-import { useSelector } from 'react-redux'
+import { ArrowUpRight, BadgeDollarSign, BellPlus, CalendarDays, ListOrdered, ShoppingCart, Truck } from 'lucide-react';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllOrdersForAdmin } from '../../store/admin/order-slice';
 
 function AdminDashboard() {
 
   const {user} = useSelector((state) => state.auth);
-  console.log("admin user" , user);
+  const { orderList, orderDetails } = useSelector((state) => state.adminOrder);
+  const dispatch = useDispatch();
+
+
+  useEffect(() =>{
+    dispatch(getAllOrdersForAdmin());
+  } , [dispatch])
+
+  console.log("order Data" , orderList);
+  // console.log("admin user" , user);
   const today = new Date();
   const formattedDate = today.toLocaleDateString('en-GB', {
     day: '2-digit',
@@ -14,16 +24,20 @@ function AdminDashboard() {
   });
 
 
-  const StatCard = ({ icon, title, value }) => {
+  const StatCard = ({ icon, title, value , count }) => {
     return (
       <div className='flex h-[100px] justify-around items-center p-6 border  shadow-md rounded-lg'>
         <div className='w-[50px] h-[50px] p-2 bg-gray-300/40 border shadow-md rounded-full flex justify-center items-center'>
           {icon}
         </div>
-        <div className='flex flex-col gap-2'>
-          <p className='font-bold'>{title}</p>
-          <p className='text-2xl'>{value}</p>
-        </div>
+        <div className='flex justify-between items-center'>
+  <p className='text-2xl'>{value}</p>
+  <p className=' flex items-center gap-1'>
+    <ArrowUpRight size={15} color='green' />
+    ({count})
+  </p>
+</div>
+
       </div>
     );
   };
@@ -62,16 +76,26 @@ function AdminDashboard() {
   <p className='text-2xl'>250$</p>
   </div>
 </div> */}
-  <StatCard icon={<BadgeDollarSign />} title="Total Products" value="250$" />
-  <StatCard icon={<ShoppingCart />} title="Orders Today" value="18" />
-  <StatCard icon={<Truck />} title="Pending Deliveries" value="5" />
-  <StatCard icon={<ListOrdered />} title="Pending Orders" value="45" />
+  <StatCard icon={<BadgeDollarSign />} title="Total Products" value="250$" count={"2.5%"} />
+  <StatCard icon={<ShoppingCart />} title="Orders Today" value="18" count={"2.5% "}  />
+  <StatCard icon={<Truck />} title="Pending Deliveries" value="5" count={"2.5%"}  />
+  <StatCard icon={<ListOrdered />} title="Pending Orders" value="45" count={"2.5%"}  />
 </div>
 
-<div className='mt-3 min-h-screen mb-2 border-b rounded-2xl w-full p-6 border-2 shadow-sm border-gray-300/20'>
-  <div className='flex justify-evenly p-4 gap-3 '>
-    <div>
-    <h3>Your Sales Report </h3>
+<div className='mt-3 max-h-fit mb-2 border-b rounded-2xl w-full p-6 border-2 shadow-sm border-gray-300/20'>
+ <h3 className='font-bold text-2xl '>Your Sales Report </h3>
+ <p className='text-left'>Have a Look at your Sale</p>
+  <div className='flex justify-around p-4 gap-3 '>
+    <div className='flex flex-col gap-1 mt-3' >
+      <h1 className='text-5xl font-bold' > $4558.90</h1>
+      <div className='flex text-left justify-center items-center gap-1'>
+      <p><ArrowUpRight  size={20} color='green' /></p>
+      <h3 className='text-green-600 '>$2339.5 (2.5%)</h3>
+
+      </div>
+    </div>
+    <div className='border-1 border-gray-300 shadow-lg z-3' >
+      
     </div>
   </div>
 </div>
