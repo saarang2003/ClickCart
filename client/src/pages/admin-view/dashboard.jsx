@@ -102,16 +102,20 @@ function AdminDashboard() {
  <h3 className='font-bold text-2xl '>Your Sales Report </h3>
  <p className='text-left'>Have a Look at your Sale</p>
   <div className='flex justify-around p-4 gap-3 '>
-    <div className='flex flex-col gap-1 mt-3 border-2 border-red-500' >
+    <div className='flex flex-col gap-3 items-center  mt-3' >
       <h1 className='text-5xl font-bold' > $4558.90</h1>
       <div className='flex text-left justify-center items-center gap-1'>
       <p><ArrowUpRight  size={20} color='green' /></p>
       <h3 className='text-green-600 '>$2339.5 (2.5%)</h3>
 
       </div>
-    </div>
-    <div className='w-[400px] border border-gray-300 shadow-lg z-3'>
+    <div className='w-[400px] shadow-lg z-3'>
     <Chart data01={data01} />
+  </div>
+    </div>
+
+  <div>
+    Chart plot
   </div>
   </div>
 </div>
