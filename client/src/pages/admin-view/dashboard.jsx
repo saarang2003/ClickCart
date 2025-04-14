@@ -2,6 +2,7 @@ import { ArrowUpRight, BadgeDollarSign, BellPlus, CalendarDays, ListOrdered, Sho
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllOrdersForAdmin } from '../../store/admin/order-slice';
+import Chart from '../../components/admin-view/Chart';
 
 function AdminDashboard() {
 
@@ -23,6 +24,18 @@ function AdminDashboard() {
     year: 'numeric',
   });
 
+  const cardData = () => {
+    const statusCounts = {};
+  
+    orderList.forEach(({ orderStatus }) => {
+      statusCounts[orderStatus] = (statusCounts[orderStatus] || 0) + 1;
+    });
+  
+    return Object.entries(statusCounts).map(([name, value]) => ({ name, value }));
+  };
+  console.log("cardlmd",cardData())
+  
+
 
   const StatCard = ({ icon, title, value , count }) => {
     return (
@@ -41,6 +54,9 @@ function AdminDashboard() {
       </div>
     );
   };
+  const data01 = cardData();
+
+  
 
 
 
@@ -86,7 +102,7 @@ function AdminDashboard() {
  <h3 className='font-bold text-2xl '>Your Sales Report </h3>
  <p className='text-left'>Have a Look at your Sale</p>
   <div className='flex justify-around p-4 gap-3 '>
-    <div className='flex flex-col gap-1 mt-3' >
+    <div className='flex flex-col gap-1 mt-3 border-2 border-red-500' >
       <h1 className='text-5xl font-bold' > $4558.90</h1>
       <div className='flex text-left justify-center items-center gap-1'>
       <p><ArrowUpRight  size={20} color='green' /></p>
@@ -94,9 +110,9 @@ function AdminDashboard() {
 
       </div>
     </div>
-    <div className='border-1 border-gray-300 shadow-lg z-3' >
-      
-    </div>
+    <div className='w-[400px] border border-gray-300 shadow-lg z-3'>
+    <Chart data01={data01} />
+  </div>
   </div>
 </div>
 
