@@ -3,6 +3,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllOrdersForAdmin } from '../../store/admin/order-slice';
 import Chart from '../../components/admin-view/Chart';
+import { AreaChart } from 'recharts';
+import Areachart from '../../components/admin-view/Areachart';
 
 function AdminDashboard() {
 
@@ -56,8 +58,33 @@ function AdminDashboard() {
   };
   const data01 = cardData();
 
-  
+const areaCardData = () => {
+  const dailyMetrics = {};
 
+  orderList.forEach(({ orderDate, totalAmount }) => {
+    const date = new Date(orderDate).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
+
+    if (!dailyMetrics[date]) {
+      dailyMetrics[date] = { name: date, totalAmount: 0, orderCount: 0 };
+    }
+
+    dailyMetrics[date].totalAmount += totalAmount;
+    dailyMetrics[date].orderCount += 1;
+  });
+
+  return Object.values(dailyMetrics).sort(
+    (a, b) => new Date(a.name) - new Date(b.name)
+  );
+};
+
+
+  console.log("arae card" , areaCardData());
+  const data02 = areaCardData();
+  
 
 
   return (
@@ -114,8 +141,9 @@ function AdminDashboard() {
   </div>
     </div>
 
-  <div>
-    Chart plot
+  <div className='w-[400px] shadow-lg z-3'>
+    <Areachart data = {data02} />
+
   </div>
   </div>
 </div>
