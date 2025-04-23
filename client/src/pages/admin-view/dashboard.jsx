@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllOrdersForAdmin } from "../../store/admin/order-slice";
 import Chart from "../../components/admin-view/Chart";
 import Areachart from "../../components/admin-view/Areachart";
+import BarChartComponent from "../../components/admin-view/BarChartComponent";
 
 function AdminDashboard() {
   const { user } = useSelector((state) => state.auth);
@@ -75,8 +76,8 @@ function AdminDashboard() {
           {icon}
         </div>
         <div className="flex justify-between items-center">
-          <p className="text-2xl">{value}</p>
-          <p className="flex items-center gap-1">
+          <p className=" font-bold text-3xl">{value}</p>
+          <p className="flex items-center  gap-1">
             <ArrowUpRight size={15} color="green" />
             ({count})
           </p>
@@ -122,32 +123,36 @@ function AdminDashboard() {
             icon={<ShoppingCart />}
             title="Orders Today"
             value="18"
-            count={"2.5% "}
+            count={"7.5% "}
           />
           <StatCard
             icon={<Truck />}
             title="Pending Deliveries"
             value="5"
-            count={"2.5%"}
+            count={"3.0%"}
           />
           <StatCard
             icon={<ListOrdered />}
             title="Pending Orders"
             value="45"
-            count={"2.5%"}
+            count={"5.2%"}
           />
         </div>
 
         <div className="mt-3 max-h-fit mb-2 border-b rounded-2xl w-full p-6 border-2 shadow-sm border-gray-300/20">
           <h3 className="font-bold text-2xl">Your Sales Report</h3>
           <p className="text-left">Have a Look at your Sale</p>
-          <div className="flex items-center justify-center gap-8 p-4">
+
+          <div className="flex items-center justify-evenly gap-8 p-4">
             {/* Revenue Section */}
             <div className="flex flex-col items-center">
-              <h1 className="text-5xl font-bold">$4558.90</h1>
-              <div className="flex items-center gap-2">
+              <h1 className="text-5xl  font-bold">$4558.90</h1>
+              <div className="flex items-center gap-2 mb-3">
                 <ArrowUpRight size={20} color="green" />
                 <h3 className="text-green-600">$2339.5 (2.5%)</h3>
+              </div>
+              <div className="w-[450px] h-[450px]">
+            <BarChartComponent data={data01} />
               </div>
             </div>
 

@@ -19,12 +19,12 @@ function Areachart({ data }) {
         >
           <defs>
             <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+              <stop offset="5%" stopColor="#8884d8 " stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#8884d8 " stopOpacity={0} />
             </linearGradient>
             <linearGradient id="colorCount" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#ff8042" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#ff8042" stopOpacity={0} />
+              <stop offset="5%" stopColor="#2196F3  " stopOpacity={0.8} />
+              <stop offset="95%" stopColor="#2196F3  " stopOpacity={0} />
             </linearGradient>
           </defs>
           <XAxis dataKey="name" />
@@ -36,7 +36,7 @@ function Areachart({ data }) {
             yAxisId="left"
             type="monotone"
             dataKey="totalAmount"
-            stroke="#8884d8"
+            stroke="#8884d8 "
             fillOpacity={1}
             fill="url(#colorTotal)"
             name="Total Amount"
@@ -45,7 +45,7 @@ function Areachart({ data }) {
             yAxisId="right"
             type="monotone"
             dataKey="orderCount"
-            stroke="#ff8042"
+            stroke="#2196F3  "
             fillOpacity={1}
             fill="url(#colorCount)"
             name="Order Count"
