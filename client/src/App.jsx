@@ -20,6 +20,7 @@ import { checkAuth } from "./store/auth-slice";
 import PaymentReturnPage from "./pages/shopping-view/paypal-return";
 import PaymentSuccessPage from "./pages/shopping-view/paypal-success";
 import SearchProducts from "./pages/shopping-view/search";
+import Home from "./pages/Home";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useSelector(
@@ -36,7 +37,7 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route
+        {/* <Route
           path="/auth"
           element={
             <CheckAuth isAuthenticated={isAuthenticated} user={user}>
@@ -46,8 +47,10 @@ function App() {
         >
           <Route path="login" element={<AuthLogin />} />
           <Route path="register" element={<AuthRegister />} />
-        </Route>
+        </Route> */}
 
+        <Route path="/" element = {<Home />} />
+  
         <Route
           path="/admin"
           element={
