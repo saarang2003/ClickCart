@@ -34,9 +34,9 @@ function FeaturedCategories() {
   }, []);
 
   return (
-    <div className="mb-12">
+    <div className="mb-12 max-w-screen-xl m-auto">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">Featured Categories</h2>
+        <h2 className="text-3xl font-bold">Featured Categories</h2>
         <div className="flex gap-2">
           <button
             onClick={handlePrev}

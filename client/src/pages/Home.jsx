@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
+  ArrowRightIcon,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
@@ -12,7 +13,6 @@ import DropDownCategories from "../components/shopping-view/DropDownCategories";
 import Home1 from "../assets/home1.jpg";
 import Home2 from "../assets/home2.png";
 import FeaturedCategories from "../components/shopping-view/featureCategories";
-
 
 function BlogArticlesSection() {
   const articles = [
@@ -94,15 +94,16 @@ function GlassmorphismNewArrivals() {
           {/* Left Column - Text Content */}
           <div className="md:col-span-4 space-y-6">
             {/* Glassmorphism Label */}
-            <div className="inline-block">
-              <span className="bg-amber-500 text-white font-semibold px-4 py-1 rounded-full">
-                Glassmorphism
+
+            <div className="inline-block rounded-xl bg-black/10 backdrop-blur-lg shadow-lg ring-1 ring-white/10 border border-white/10 p-2 z-50">
+              <span className="text-black font-semibold px-4 py-1 rounded-full">
+                Trending Now · Grab Deals Fast!
               </span>
             </div>
 
             {/* Heading and Description */}
             <div className="space-y-4">
-              <h2 className="text-3xl font-bold">
+              <h2 className="text-4xl font-bold">
                 New Arrivals, Just For You!
               </h2>
               <p className="text-gray-700">
@@ -112,28 +113,28 @@ function GlassmorphismNewArrivals() {
             </div>
 
             {/* Fashion Categories */}
-            <div className="space-y-2 text-sm">
+            <div className="space-y-2 text-md">
               <p>
-                <span className="font-semibold">**Men's Fashion**</span> – Cool,
+                <span className="font-semibold">Men's Fashion</span> – Cool,
                 casual, and effortlessly stylish.
               </p>
               <p>
-                <span className="font-semibold">**Women's Fashion**</span> –
+                <span className="font-semibold">Women's Fashion</span> –
                 Elegant, bold, and chic.
               </p>
               <p>
-                <span className="font-semibold">**Kids Fashion**</span> –
-                Playful styles for the little ones.
+                <span className="font-semibold">Kids Fashion</span> – Playful
+                styles for the little ones.
               </p>
               <p>
-                <span className="font-semibold">**Accessories**</span> –
-                Complete your look with the perfect accessories.
+                <span className="font-semibold">Accessories </span> – Complete
+                your look with the perfect accessories.
               </p>
             </div>
 
             {/* Shop Now Button */}
-            <Button className="bg-amber-500 hover:bg-amber-600 text-white rounded-full px-6">
-              Shop now
+            <Button className="bg-amber-500 mt-2 hover:bg-amber-600 text-white rounded-full px-6">
+              Shop now <ArrowRightIcon width={20} height={20} />
             </Button>
 
             {/* Stats Bar */}
@@ -155,37 +156,48 @@ function GlassmorphismNewArrivals() {
 
           {/* Right Column - Product Cards with Glassmorphism Effect */}
           <div className="md:col-span-8">
-            <div className="grid grid-cols-12 gap-4 h-full">
-              {/* Main Product Card */}
-              <div className="col-span-12 md:col-span-7 h-full">
-                <div className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg h-full shadow-lg overflow-hidden">
-                  <div className="bg-gray-200 h-full min-h-[250px]"></div>
-                </div>
-              </div>
+  <div className="flex gap-4 h-full">
+    {/* Product Card 1 */}
+    <div className="flex-1 bg-white/20 backdrop-blur-sm border  border-white/30 rounded-lg shadow-lg overflow-hidden hover:flex-[2] transition-all duration-300">
+      <img
+        src="/placeholder.svg"
+        alt="Product 1"
+        className="w-full h-full object-cover"
+      />
+    </div>
 
-              {/* Side Product Cards */}
-              <div className="col-span-12 md:col-span-5 grid grid-rows-2 gap-4 h-full">
-                <div className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg overflow-hidden">
-                  <div className="bg-gray-200 h-full min-h-[120px]"></div>
-                </div>
-                <div className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg overflow-hidden">
-                  <div className="bg-gray-200 h-full min-h-[120px]"></div>
-                </div>
-              </div>
-            </div>
+    {/* Product Card 2 */}
+    <div className="flex-1 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg overflow-hidden hover:flex-[2] transition-all duration-300">
+      <img
+        src="/placeholder.svg"
+        alt="Product 2"
+        className="w-full h-full object-cover"
+      />
+    </div>
 
-            {/* Navigation */}
-            <div className="flex items-center mt-4 gap-2">
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full bg-amber-500 text-white border-amber-500 h-8 w-8"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <span className="text-gray-700">Glass</span>
-            </div>
-          </div>
+    {/* Product Card 3 */}
+    <div className="flex-1 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg overflow-hidden hover:flex-[2] transition-all duration-300">
+      <img
+        src="/placeholder.svg"
+        alt="Product 3"
+        className="w-full h-full object-cover"
+      />
+    </div>
+
+    {/* Product Card 4 */}
+    <div className="flex-1 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg overflow-hidden hover:flex-[2] transition-all duration-300">
+      <img
+        src="/placeholder.svg"
+        alt="Product 4"
+        className="w-full h-full object-cover"
+      />
+    </div>
+  </div>
+</div>
+
+
+
+
         </div>
 
         {/* Step Into Style Section */}
@@ -314,37 +326,35 @@ function Home() {
 
         {/* Main Content */}
         <main className="flex-1 px-4 sm:px-6 py-6">
+          {/* Hero Section */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+            {/* Left Section */}
+            <div className="md:col-span-2 bg-gray-200 rounded-lg border-2 border-red-500 h-[700px] sm:h-[500px] overflow-hidden">
+              <img
+                src={Home1}
+                alt="Hero"
+                className="w-full h-full object-cover"
+              />
+            </div>
 
-
-{/* Hero Section */}
-<div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-  {/* Left Section */}
-  <div className="md:col-span-2 bg-gray-200 rounded-lg border-2 border-red-500 h-[700px] sm:h-[500px] overflow-hidden">
-    <img
-      src={Home1}
-      alt="Hero"
-      className="w-full h-full object-cover"
-    />
-  </div>
-
-  {/* Right Section */}
-  <div className="flex flex-col gap-4">
-    <div className="bg-teal-700 rounded-lg h-[250px] overflow-hidden">
-      <img
-        src={Home2}
-        alt="Special Offer"
-        className="w-full h-full object-cover"
-      />
-    </div>
-    <div className="bg-gray-200 rounded-lg h-[230px] overflow-hidden">
-      {/* <img
+            {/* Right Section */}
+            <div className="flex flex-col gap-4">
+              <div className="bg-teal-700 rounded-lg h-[250px] overflow-hidden">
+                <img
+                  src={Home2}
+                  alt="Special Offer"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="bg-gray-200 rounded-lg h-[230px] overflow-hidden">
+                {/* <img
         src={Home3}
         alt="Additional Offer"
         className="w-full h-full object-cover"
       /> */}
-    </div>
-  </div>
-</div>
+              </div>
+            </div>
+          </div>
 
           {/* Style That Speaks */}
           <div className="text-center mb-12">
@@ -415,10 +425,6 @@ function Home() {
             </div>
           </div> */}
           <FeaturedCategories />
-
-
-
-
         </main>
 
         <GlassmorphismNewArrivals />
