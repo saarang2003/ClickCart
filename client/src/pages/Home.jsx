@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import DropDownCategories from "../components/shopping-view/DropDownCategories";
 import Home1 from "../assets/home1.jpg";
 import Home2 from "../assets/home2.png";
+import FeaturedCategories from "../components/shopping-view/featureCategories";
 
 
 function BlogArticlesSection() {
@@ -355,7 +356,7 @@ function Home() {
           </div>
 
           {/* Featured Categories */}
-          <div className="mb-12">
+          {/* <div className="mb-12">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold">Featured Categories</h2>
               <div className="flex gap-2">
@@ -412,7 +413,12 @@ function Home() {
                 />
               ))}
             </div>
-          </div>
+          </div> */}
+          <FeaturedCategories />
+
+
+
+
         </main>
 
         <GlassmorphismNewArrivals />
