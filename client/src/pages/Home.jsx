@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ChevronDown,
@@ -8,6 +8,7 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import { Button } from "@/components/ui/button"
+import DropDownCategories from "../components/shopping-view/DropDownCategories";
 
 
 
@@ -192,6 +193,14 @@ function BlogArticlesSection() {
 
 
 function Home() {
+
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownVisible(!isDropdownVisible);
+  };
+
+
   return (
     <div className="flex flex-col min-h-screen bg-[#f0f8ff]">
       {/* Top Announcement Bar */}
@@ -205,19 +214,16 @@ function Home() {
             Order Tracking
           </Link>
           <div className="flex items-center gap-1">
-            <span>🇺🇸</span>
-            <span>English</span>
-            <ChevronDown className="h-4 w-4" />
-          </div>
-          <div className="flex items-center gap-1">
-            <span>USD</span>
-            <ChevronDown className="h-4 w-4" />
+            <select name="" id="">
+              <option value="USD">USD</option>
+              <option value="Ind">Ind</option>
+            </select>
           </div>
         </div>
       </div>
 
       {/* Header */}
-      <header className="bg-white py-4 px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <header className="bg-white py-3 px-6 flex flex-col sm:flex-row justify-between items-center gap-4 border-b">
         <div className="flex items-center gap-6">
           <Link to="/" className="flex items-center gap-2">
             <div className="bg-orange-500 p-1 rounded">
@@ -226,9 +232,17 @@ function Home() {
             <span className="text-2xl font-bold">SnapCart</span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-2 text-sm font-medium">
-            <ChevronDown className="h-4 w-4" />
+             <div className="relative hidden md:flex items-center gap-2 text-sm font-medium">
             <span>SHOP BY CATEGORIES</span>
+            <ChevronDown
+              className="h-4 w-4 cursor-pointer"
+              onClick={toggleDropdown}
+            />
+            {isDropdownVisible && (
+              <div className="absolute w-[600px] top-full left-0 mt-2 z-10">
+                <DropDownCategories />
+              </div>
+            )}
           </div>
         </div>
 
