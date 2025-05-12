@@ -29,8 +29,8 @@ function BlogArticlesSection() {
       title: "10 Wardrobe Essentials for Every Season",
       date: "2 Feb",
       day: 2,
-      month: "Feb",
-      image: "/placeholder.svg?height=400&width=300",
+      month: "four",
+      image: one,
       slug: "wardrobe-essentials",
     },
     {
@@ -39,7 +39,7 @@ function BlogArticlesSection() {
       date: "5 Feb",
       day: 5,
       month: "Feb",
-      image: "/placeholder.svg?height=400&width=300",
+      image: five,
       slug: "top-trends",
     },
   ];
@@ -48,7 +48,7 @@ function BlogArticlesSection() {
     <section className="bg-gray-100 py-12 px-6 mb-3 md:px-12">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold mb-4 md:mb-0">
+          <h2 className="text-5xl font-bold mb-4 md:mb-0">
             Explore Our Latest <span className="text-gray-400">Blog</span>{" "}
             Articles
           </h2>
@@ -74,7 +74,7 @@ function BlogArticlesSection() {
             >
               <div className="relative overflow-hidden rounded-lg">
                 <img
-                  src={article.image || "/placeholder.svg"}
+                  src={article.image }
                   alt={article.title}
                   className="w-full h-[280px] object-cover transition-transform duration-300 group-hover:scale-105"
                 />
@@ -259,10 +259,10 @@ function Home() {
         <header className="bg-white py-3 px-6 flex flex-col sm:flex-row justify-between items-center gap-4 border-b">
           <div className="flex items-center gap-6">
             <Link to="/" className="flex items-center gap-2">
-              <div className="bg-orange-500 p-1 rounded">
+              <div className="bg-zinc-800 p-2 rounded">
                 <ShoppingCart className="h-5 w-5 text-white" />
               </div>
-              <span className="text-2xl font-bold">SnapCart</span>
+              <span className="text-2xl font-bold">ClickCart</span>
             </Link>
 
             <div className="relative hidden md:flex items-center gap-2 text-sm font-medium">
@@ -435,7 +435,7 @@ function Home() {
         {/* Footer */}
         <footer className="bg-white py-4 border-t">
           <div className="container mx-auto text-center text-sm text-gray-500">
-            © 2023 SnapCart. All rights reserved.
+            © 2025 ClickCart. All rights reserved.
           </div>
         </footer>
       </div>
