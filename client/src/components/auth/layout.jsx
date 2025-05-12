@@ -7,7 +7,7 @@ function AuthLayout() {
       <div className="hidden lg:flex items-center justify-center text-white  bg-black w-1/2 px-12">
         <div className="space-y-6 text-center text-primary-foreground rounded-3xl">
           <h1 className="text-2xl font-extrabold tracking-tight">
-            Welcome to Ecommerce Shopping
+            Welcome to ClickCart
           </h1>
         <img src={login} alt="login" className="w-full h-full object-cover rounded-2xl " />
         </div>
