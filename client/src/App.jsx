@@ -37,7 +37,7 @@ function App() {
   return (
     <div>
       <Routes>
-        {/* <Route
+        <Route
           path="/auth"
           element={
             <CheckAuth isAuthenticated={isAuthenticated} user={user}>
@@ -47,7 +47,7 @@ function App() {
         >
           <Route path="login" element={<AuthLogin />} />
           <Route path="register" element={<AuthRegister />} />
-        </Route> */}
+        </Route>
 
         <Route path="/" element = {<Home />} />
   
