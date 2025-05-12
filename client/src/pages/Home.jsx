@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import DropDownCategories from "../components/shopping-view/DropDownCategories";
 import Home1 from "../assets/home1.jpg";
 import Home2 from "../assets/home2.png";
+import Homel from '../assets/Home.webp';
 import FeaturedCategories from "../components/shopping-view/featureCategories";
 
 function BlogArticlesSection() {
@@ -200,23 +201,42 @@ function GlassmorphismNewArrivals() {
 
         </div>
 
-        {/* Step Into Style Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-16">
-          <div>
-            <h2 className="text-5xl font-bold">
-              Step Into <span className="text-gray-400">Style</span>
-            </h2>
-          </div>
-          <div className="space-y-2">
-            <p className="font-semibold">
-              Up to 50% OFF – On selected items. Hurry, while stocks last!
-            </p>
-            <p>
-              Seasonal Sale – Your favorite styles, now at a fraction of the
-              price.
-            </p>
-          </div>
-        </div>
+      {/* Step Into Style Section */}
+<div className="flex flex-col md:flex-row gap-8 items-center mt-16">
+  {/* Left Section */}
+  <div className="flex flex-col items-center justify-center text-center h-full">
+    <h2 className="text-5xl mb-4 font-bold">
+      Step Into <span className="text-gray-400">Style</span>
+    </h2>
+    <div className="w-[650px] h-[300px] border-2 border-red-400 flex">
+      <img src={Home1} alt="Image 1" className="w-1/2 h-full object-cover" />
+      <img src={Home2} alt="Image 2" className="w-1/2 h-full object-cover" />
+    </div>
+  </div>
+
+  {/* Right Section */}
+  <div className="flex flex-col items-center justify-center h-[300px] bg-gray-200 p-6 rounded-lg shadow-md">
+    <div className="bg-black text-white text-lg font-bold px-4 py-2 rounded-md mb-4">
+      Offer
+    </div>
+    <h2 className="text-xl font-semibold mb-2">Exclusive Fashion Outlet Awaits</h2>
+    <p className="text-center text-gray-600 mb-4">
+      Exclusive Fashion Outlet Awaits Exclusive Fashion Outlet Awaits Exclusive
+      Fashion Outlet Awaits Exclusive Fashion Outlet Awaits
+    </p>
+    <div className="flex items-center gap-4">
+      <button className="bg-black text-white px-6 py-2 rounded-md">
+        Try Now
+      </button>
+      <button className="bg-black text-white rounded-full p-3">
+        <ArrowRightIcon className="h-5 w-5" />
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
       </div>
     </div>
   );
@@ -276,19 +296,19 @@ function Home() {
           </div>
 
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-            <Link to="#" className="hover:text-orange-500">
+            <Link to="#" className="hover:underline text-zinc-700">
               Home
             </Link>
-            <Link to="#" className="hover:text-orange-500">
+            <Link to="#" className="hover:underline text-zinc-700">
               Fashion
             </Link>
-            <Link to="#" className="hover:text-orange-500">
+            <Link to="#" className="hover:underline text-zinc-700">
               New Arrivals
             </Link>
-            <Link to="#" className="hover:text-orange-500">
+            <Link to="#" className="hover:underline text-zinc-700">
               All Brands
             </Link>
-            <Link to="#" className="flex items-center hover:text-orange-500">
+            <Link to="#" className="flex items-center hover:underline text-zinc-700">
               More
               <ChevronDown className="h-4 w-4 ml-1" />
             </Link>
@@ -297,20 +317,20 @@ function Home() {
           <div className="flex items-center gap-4">
             <Link
               to="/auth/login"
-              className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-md px-4 py-2"
+              className="bg-zinc-800 text-white  hover:bg-zinc-300 hover:text-black shadow-lg  rounded-md px-4 py-2"
             >
               Login
             </Link>
             <Link
               to="/auth/register"
-              className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-md px-4 py-2"
+              className="bg-zinc-800 text-white  hover:bg-zinc-300 hover:text-black shadow-lg  rounded-md px-4 py-2"
             >
               Register
             </Link>
             <div className="flex items-center gap-3">
-              <Heart className="h-6 w-6 text-gray-600 cursor-pointer hover:text-red-500" />
+              <Heart className="h-6 w-6 text-gray-500 cursor-pointer hover:underline hover:text-zinc-900" />
               <div className="relative">
-                <ShoppingCart className="h-6 w-6 text-gray-600 cursor-pointer hover:text-orange-500" />
+                <ShoppingCart className="h-6 w-6 text-gray-500 cursor-pointer hover:underline hover:text-zinc-900" />
               </div>
             </div>
           </div>
@@ -325,34 +345,16 @@ function Home() {
         </div>
 
         {/* Main Content */}
-        <main className="flex-1 px-4 sm:px-6 py-6">
+        <main className=" px-4 sm:px-6 py-6">
           {/* Hero Section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+          <div className="gap-4 mb-12">
             {/* Left Section */}
-            <div className="md:col-span-2 bg-gray-200 rounded-lg border-2 border-red-500 h-[700px] sm:h-[500px] overflow-hidden">
+            <div className="md:col-span-2 bg-gray-200 rounded-lg  h-[700px] sm:h-[500px] overflow-hidden">
               <img
-                src={Home1}
+                src={Homel}
                 alt="Hero"
                 className="w-full h-full object-cover"
               />
-            </div>
-
-            {/* Right Section */}
-            <div className="flex flex-col gap-4">
-              <div className="bg-teal-700 rounded-lg h-[250px] overflow-hidden">
-                <img
-                  src={Home2}
-                  alt="Special Offer"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="bg-gray-200 rounded-lg h-[230px] overflow-hidden">
-                {/* <img
-        src={Home3}
-        alt="Additional Offer"
-        className="w-full h-full object-cover"
-      /> */}
-              </div>
             </div>
           </div>
 

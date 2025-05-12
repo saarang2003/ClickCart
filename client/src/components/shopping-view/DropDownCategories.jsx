@@ -17,7 +17,7 @@ function DropDownCategories() {
   const images = [
     { id: 1, src: dropdown1, className: "col-span-2 row-span-2" }, // Image 1
     { id: 2, src: dropdown3, className: "col-span-2 row-span-3 col-start-1 row-start-3" }, // Image 2
-    { id: 3, src: dropdown2, className: "col-span-2 row-span-5 col-start-3 row-start-1" }, // Image 3
+    { id: 3, src: dropdown2, className: "col-span-3 row-span-5 col-start-3 row-start-1" }, // Image 3
   ];
 
   return (
