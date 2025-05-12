@@ -96,7 +96,7 @@ function GlassmorphismNewArrivals() {
           <div className="md:col-span-4 space-y-6">
             {/* Glassmorphism Label */}
 
-            <div className="inline-block rounded-xl bg-black/10 backdrop-blur-lg shadow-lg ring-1 ring-white/10 border border-white/10 p-2 z-50">
+            <div className="backdrop-filter backdrop-blur-xl bg-white/30 border border-white/20    hover:bg-white/40 rounded-xl shadow-lg transition-all duration-300">
               <span className="text-black font-semibold px-4 py-1 rounded-full">
                 Trending Now · Grab Deals Fast!
               </span>
@@ -361,10 +361,9 @@ function Home() {
           {/* Style That Speaks */}
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-3">Style That Speaks</h2>
-            <p className="max-w-2xl text mx-auto text-gray-600">
-              Shop the latest trends in high-quality, aesthetic clothing, and
-              make a statement every time you step out.
-            </p>
+           <p className="max-w-3xl mx-auto text-gray-600 font-serif italic">
+  Shop the latest trends in high-quality, aesthetic clothing, and make a statement every time you step out.
+</p>
           </div>
 
           {/* Featured Categories */}
