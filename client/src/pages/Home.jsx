@@ -10,9 +10,12 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DropDownCategories from "../components/shopping-view/DropDownCategories";
-import Home1 from "../assets/home1.jpg";
-import Home2 from "../assets/home2.png";
 import Homel from '../assets/Home.webp';
+import one from '../assets/glass/one.avif';
+import two from '../assets/glass/two.avif';
+import three from '../assets/glass/three.avif';
+import four from '../assets/glass/four.avif';
+
 import FeaturedCategories from "../components/shopping-view/featureCategories";
 
 function BlogArticlesSection() {
@@ -96,11 +99,11 @@ function GlassmorphismNewArrivals() {
           <div className="md:col-span-4 space-y-6">
             {/* Glassmorphism Label */}
 
-            <div className="backdrop-filter backdrop-blur-xl bg-white/30 border border-white/20    hover:bg-white/40 rounded-xl shadow-lg transition-all duration-300">
-              <span className="text-black font-semibold px-4 py-1 rounded-full">
-                Trending Now · Grab Deals Fast!
-              </span>
-            </div>
+           <div className="backdrop-blur-lg px-3 py-2 max-w-fit bg-white/30 border border-white/40 hover:bg-white/70 cursor-pointer rounded-xl shadow-lg transition-all duration-300">
+  <span className="text-black font-semibold  rounded-full">
+    Trending Now · Grab Deals Fast!
+  </span>
+</div>
 
             {/* Heading and Description */}
             <div className="space-y-4">
@@ -134,7 +137,7 @@ function GlassmorphismNewArrivals() {
             </div>
 
             {/* Shop Now Button */}
-            <Button className="bg-amber-500 mt-2 hover:bg-amber-600 text-white rounded-full px-6">
+            <Button className="bg-zinc-800 mt-2 hover:bg-zinc-200 hover:text-black text-white rounded-full px-6">
               Shop now <ArrowRightIcon width={20} height={20} />
             </Button>
 
@@ -161,7 +164,7 @@ function GlassmorphismNewArrivals() {
     {/* Product Card 1 */}
     <div className="flex-1 bg-white/20 backdrop-blur-sm border  border-white/30 rounded-lg shadow-lg overflow-hidden hover:flex-[2] transition-all duration-300">
       <img
-        src="/placeholder.svg"
+        src={one}
         alt="Product 1"
         className="w-full h-full object-cover"
       />
@@ -170,7 +173,7 @@ function GlassmorphismNewArrivals() {
     {/* Product Card 2 */}
     <div className="flex-1 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg overflow-hidden hover:flex-[2] transition-all duration-300">
       <img
-        src="/placeholder.svg"
+        src={two}
         alt="Product 2"
         className="w-full h-full object-cover"
       />
@@ -179,7 +182,7 @@ function GlassmorphismNewArrivals() {
     {/* Product Card 3 */}
     <div className="flex-1 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg overflow-hidden hover:flex-[2] transition-all duration-300">
       <img
-        src="/placeholder.svg"
+        src={three}
         alt="Product 3"
         className="w-full h-full object-cover"
       />
@@ -188,7 +191,7 @@ function GlassmorphismNewArrivals() {
     {/* Product Card 4 */}
     <div className="flex-1 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg overflow-hidden hover:flex-[2] transition-all duration-300">
       <img
-        src="/placeholder.svg"
+        src={four}
         alt="Product 4"
         className="w-full h-full object-cover"
       />
@@ -209,8 +212,8 @@ function GlassmorphismNewArrivals() {
       Step Into <span className="text-gray-400">Style</span>
     </h2>
     <div className="w-[650px] h-[300px] border-2 border-red-400 flex">
-      <img src={Home1} alt="Image 1" className="w-1/2 h-full object-cover" />
-      <img src={Home2} alt="Image 2" className="w-1/2 h-full object-cover" />
+      <img src={one} alt="Image 1" className="w-1/2 h-full object-cover" />
+      <img src={one} alt="Image 2" className="w-1/2 h-full object-cover" />
     </div>
   </div>
 
