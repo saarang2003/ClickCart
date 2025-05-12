@@ -6,7 +6,10 @@ import {
   ChevronLeft,
   ChevronRight,
   Heart,
+  Instagram,
   ShoppingCart,
+  Twitter,
+  Youtube,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DropDownCategories from "../components/shopping-view/DropDownCategories";
@@ -433,11 +436,46 @@ function Home() {
         <BlogArticlesSection />
 
         {/* Footer */}
-        <footer className="bg-white py-4 border-t">
-          <div className="container mx-auto text-center text-sm text-gray-500">
+
+        <footer className="w-full py-14">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto">
+          {/* Replace with your logo/icon */}
+          <a href="/" className="flex  justify-center mb-10">
+            <span className="text-2xl font-bold text-zinc-600">  <ShoppingCart width={30} height={30} className="inline-block mx-4 text-base" />ClickCart</span>
+          </a>
+
+          {/* Navigation Links */}
+          <ul className="text-lg flex flex-col md:flex-row justify-center items-center gap-7 md:gap-12 py-16 mb-10 border-b border-gray-200">
+            {[ 'Products', 'Resources', 'Blogs', 'Support'].map((item) => (
+              <li key={item}>
+                <a href="#" className="text-gray-800 hover:text-gray-900">{item}</a>
+              </li>
+            ))}
+          </ul>
+
+          {/* Social Icons Placeholder */}
+          <div className="flex justify-center items-center space-x-10 mb-14">
+            {/* Replace with your own icons */}
+            <a href="#" className="text-gray-900 hover:text-indigo-600">
+              <Instagram width={30} height={30} /> {/* Example icon */}
+            </a>
+            <a href="#" className="text-gray-900 hover:text-indigo-600">
+              <Youtube width={30} height={30}   />
+            </a>
+            <a href="#" className="text-gray-900 hover:text-indigo-600">
+              <Twitter width={30} height={30}  />
+            </a>
+          </div>
+        </div>
+        <div className="container mx-auto text-center text-sm text-gray-500">
             © 2025 ClickCart. All rights reserved.
           </div>
-        </footer>
+      </div>
+    </footer>
+
+
+
       </div>
     </div>
   );
