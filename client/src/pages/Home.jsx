@@ -10,13 +10,17 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DropDownCategories from "../components/shopping-view/DropDownCategories";
-import Homel from '../assets/Home.webp';
-import one from '../assets/glass/one.avif';
-import two from '../assets/glass/two.avif';
-import three from '../assets/glass/three.avif';
-import four from '../assets/glass/four.avif';
+import Homel from "../assets/Home.webp";
+import one from "../assets/glass/one.avif";
+import two from "../assets/glass/two.avif";
+import three from "../assets/glass/three.avif";
+import four from "../assets/glass/four.avif";
+import five from "../assets/glass/five.avif";
+import six from '../assets/glass/six.avif';
+import main from '../assets/main.png';
 
 import FeaturedCategories from "../components/shopping-view/featureCategories";
+import Accordion from "../components/shopping-view/accordian";
 
 function BlogArticlesSection() {
   const articles = [
@@ -41,7 +45,7 @@ function BlogArticlesSection() {
   ];
 
   return (
-    <section className="bg-gray-100 py-12 px-6 md:px-12">
+    <section className="bg-gray-100 py-12 px-6 mb-3 md:px-12">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
           <h2 className="text-3xl font-bold mb-4 md:mb-0">
@@ -91,7 +95,7 @@ function BlogArticlesSection() {
 
 function GlassmorphismNewArrivals() {
   return (
-    <div className="bg-[#f0f6ff] min-h-screen p-4 md:p-8">
+    <div className="bg-[#f0f6ff] min-h-screen  p-4 md:p-8">
       {/* New Arrivals Section */}
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-16">
@@ -99,11 +103,11 @@ function GlassmorphismNewArrivals() {
           <div className="md:col-span-4 space-y-6">
             {/* Glassmorphism Label */}
 
-           <div className="backdrop-blur-lg px-3 py-2 max-w-fit bg-white/30 border border-white/40 hover:bg-white/70 cursor-pointer rounded-xl shadow-lg transition-all duration-300">
-  <span className="text-black font-semibold  rounded-full">
-    Trending Now · Grab Deals Fast!
-  </span>
-</div>
+            <div className="backdrop-blur-lg px-3 py-2 max-w-fit bg-white/30 border border-white/40 hover:bg-white/70 cursor-pointer rounded-xl shadow-lg transition-all duration-300">
+              <span className="text-black font-semibold  rounded-full">
+                Trending Now · Grab Deals Fast!
+              </span>
+            </div>
 
             {/* Heading and Description */}
             <div className="space-y-4">
@@ -160,86 +164,63 @@ function GlassmorphismNewArrivals() {
 
           {/* Right Column - Product Cards with Glassmorphism Effect */}
           <div className="md:col-span-8">
-  <div className="flex gap-4 h-full">
-    {/* Product Card 1 */}
-    <div className="flex-1 bg-white/20 backdrop-blur-sm border  border-white/30 rounded-lg shadow-lg overflow-hidden hover:flex-[2] transition-all duration-300">
-      <img
-        src={one}
-        alt="Product 1"
-        className="w-full h-full object-cover"
-      />
-    </div>
+            <div className="flex gap-4 h-full">
+              {/* Product Card 1 */}
+              <div className="flex-1 bg-white/20 backdrop-blur-sm border  border-white/30 rounded-lg shadow-lg overflow-hidden hover:flex-[2] transition-all duration-300">
+                <img
+                  src={one}
+                  alt="Product 1"
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
-    {/* Product Card 2 */}
-    <div className="flex-1 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg overflow-hidden hover:flex-[2] transition-all duration-300">
-      <img
-        src={two}
-        alt="Product 2"
-        className="w-full h-full object-cover"
-      />
-    </div>
+              {/* Product Card 2 */}
+              <div className="flex-1 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg overflow-hidden hover:flex-[2] transition-all duration-300">
+                <img
+                  src={two}
+                  alt="Product 2"
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
-    {/* Product Card 3 */}
-    <div className="flex-1 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg overflow-hidden hover:flex-[2] transition-all duration-300">
-      <img
-        src={three}
-        alt="Product 3"
-        className="w-full h-full object-cover"
-      />
-    </div>
+              {/* Product Card 3 */}
+              <div className="flex-1 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg overflow-hidden hover:flex-[2] transition-all duration-300">
+                <img
+                  src={three}
+                  alt="Product 3"
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
-    {/* Product Card 4 */}
-    <div className="flex-1 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg overflow-hidden hover:flex-[2] transition-all duration-300">
-      <img
-        src={four}
-        alt="Product 4"
-        className="w-full h-full object-cover"
-      />
-    </div>
-  </div>
-</div>
-
-
-
-
+              {/* Product Card 4 */}
+              <div className="flex-1 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg overflow-hidden hover:flex-[2] transition-all duration-300">
+                <img
+                  src={four}
+                  alt="Product 4"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
         </div>
 
-      {/* Step Into Style Section */}
-<div className="flex flex-col md:flex-row gap-8 items-center mt-16">
-  {/* Left Section */}
-  <div className="flex flex-col items-center justify-center text-center h-full">
-    <h2 className="text-5xl mb-4 font-bold">
-      Step Into <span className="text-gray-400">Style</span>
-    </h2>
-    <div className="w-[650px] h-[300px] border-2 border-red-400 flex">
-      <img src={one} alt="Image 1" className="w-1/2 h-full object-cover" />
-      <img src={one} alt="Image 2" className="w-1/2 h-full object-cover" />
-    </div>
-  </div>
+        {/* Step Into Style Section */}
+        <div className="w-full flex flex-col mb-16 items-center">
+          {/* Centered Text */}
+          <h2 className="text-7xl text-center mb-16 font-extrabold font-sans italic">
+            Step Into <span className="text-gray-400">Style</span>
+          </h2>
 
-  {/* Right Section */}
-  <div className="flex flex-col items-center justify-center h-[300px] bg-gray-200 p-6 rounded-lg shadow-md">
-    <div className="bg-black text-white text-lg font-bold px-4 py-2 rounded-md mb-4">
-      Offer
-    </div>
-    <h2 className="text-xl font-semibold mb-2">Exclusive Fashion Outlet Awaits</h2>
-    <p className="text-center text-gray-600 mb-4">
-      Exclusive Fashion Outlet Awaits Exclusive Fashion Outlet Awaits Exclusive
-      Fashion Outlet Awaits Exclusive Fashion Outlet Awaits
-    </p>
-    <div className="flex items-center gap-4">
-      <button className="bg-black text-white px-6 py-2 rounded-md">
-        Try Now
-      </button>
-      <button className="bg-black text-white rounded-full p-3">
-        <ArrowRightIcon className="h-5 w-5" />
-      </button>
-    </div>
-  </div>
-</div>
-
-
-
+          {/* Centered Images */}
+          <div className="w-[1200px]  flex justify-center items-center gap-4  overflow-hidden">
+            <img src={six} alt="Image 1" className="w-1/2 h-1/2 object-cover rounded-3xl" />
+            <img
+              src={five}
+              alt="Image 2"
+              className="w-1/2 h-1/2 object-cover  rounded-3xl "
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -311,7 +292,10 @@ function Home() {
             <Link to="#" className="hover:underline text-zinc-700">
               All Brands
             </Link>
-            <Link to="#" className="flex items-center hover:underline text-zinc-700">
+            <Link
+              to="#"
+              className="flex items-center hover:underline text-zinc-700"
+            >
               More
               <ChevronDown className="h-4 w-4 ml-1" />
             </Link>
@@ -350,7 +334,7 @@ function Home() {
         {/* Main Content */}
         <main className=" px-4 sm:px-6 py-6">
           {/* Hero Section */}
-          <div className="gap-4 mb-12">
+          <div className="gap-4 mb-16">
             {/* Left Section */}
             <div className="md:col-span-2 bg-gray-200 rounded-lg  h-[700px] sm:h-[500px] overflow-hidden">
               <img
@@ -364,9 +348,10 @@ function Home() {
           {/* Style That Speaks */}
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-3">Style That Speaks</h2>
-           <p className="max-w-3xl mx-auto text-gray-600 font-serif italic">
-  Shop the latest trends in high-quality, aesthetic clothing, and make a statement every time you step out.
-</p>
+            <p className="max-w-3xl mx-auto text-gray-600 font-serif italic">
+              Shop the latest trends in high-quality, aesthetic clothing, and
+              make a statement every time you step out.
+            </p>
           </div>
 
           {/* Featured Categories */}
@@ -431,7 +416,19 @@ function Home() {
           <FeaturedCategories />
         </main>
 
-        <GlassmorphismNewArrivals />
+        <div >
+          <GlassmorphismNewArrivals />
+        </div>
+
+        <div className="mb-12 flex  flex-col justify-center items-center gap-8">
+          <h1 className="text-7xl font-extrabold text-center">Redifining Your <span className="text-gray-500/70 font-sans italic underline">Wardrobe </span> </h1>
+          <img src={main} alt="main image " />
+        </div>
+
+
+      <div className="w-full px-4 mx-auto max-w-screen-2xl">
+  <Accordion />
+</div>
 
         <BlogArticlesSection />
 
