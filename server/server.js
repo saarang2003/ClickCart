@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -17,6 +18,7 @@ const shopReviewRouter = require('./routes/shop/review-route.js');
 
 connectDb();
 const app = express()
+
 const PORT  = process.env.PORT || 5000;
 app.use(cookieParser());
 app.use(express.json());
@@ -24,7 +26,7 @@ app.use(express.json());
 
 app.use(
     cors({
-      origin: "http://localhost:5173",
+      origin: process.env.CLIENT_URL,
       methods: ["GET", "POST", "DELETE", "PUT" , "PATCH"],
       allowedHeaders: [
         "Content-Type",
