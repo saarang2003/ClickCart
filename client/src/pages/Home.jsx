@@ -252,7 +252,7 @@ function Home() {
             <div className="flex items-center gap-1">
               <select name="" id="">
                 <option value="USD">USD</option>
-                <option value="Ind">Ind</option>
+                <option value="Ind">Rup</option>
               </select>
             </div>
           </div>
