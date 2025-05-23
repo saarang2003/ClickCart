@@ -121,6 +121,7 @@ export const registerUser = createAsyncThunk(
             state.isLoading = false;
             state.user = null;
             state.isAuthenticated = false;
+            state.token = null;
           }) 
           .addCase(checkAuth.pending, (state) => {
             state.isLoading = true;
@@ -134,7 +135,6 @@ export const registerUser = createAsyncThunk(
             state.isLoading = false;
             state.user = null;
             state.isAuthenticated = false;
-            state.token = null;
           })
           .addCase(logoutUser.fulfilled, (state, action) => {
             state.isLoading = false;
