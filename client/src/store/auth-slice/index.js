@@ -16,9 +16,6 @@ export const registerUser = createAsyncThunk(
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/auth/register`,
         formData,
-        {
-          withCredentials: true,
-        }
       );
   
       return response.data;
@@ -32,9 +29,6 @@ export const registerUser = createAsyncThunk(
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/auth/login`,
         formData,
-        {
-          withCredentials: true,
-        }
       );
   
       return response.data;
@@ -49,9 +43,6 @@ export const registerUser = createAsyncThunk(
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/auth/logout`,
         {},
-        {
-          withCredentials: true,
-        }
       );
   
       return response.data;
