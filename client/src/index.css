@@ -65,3 +65,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+.read-only-page {
+  pointer-events: none;
+  opacity: 0.7; /* Optional: Dim the page */
+}

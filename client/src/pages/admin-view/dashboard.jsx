@@ -13,6 +13,7 @@ import { getAllOrdersForAdmin } from "../../store/admin/order-slice";
 import Chart from "../../components/admin-view/Chart";
 import Areachart from "../../components/admin-view/Areachart";
 import BarChartComponent from "../../components/admin-view/BarChartComponent";
+import ReadOnly from "../../components/common/ReadOnly";
 
 function AdminDashboard() {
   const { user } = useSelector((state) => state.auth);
@@ -69,6 +70,7 @@ function AdminDashboard() {
   const data01 = cardData();
   const data02 = areaCardData();
 
+  // eslint-disable-next-line no-unused-vars
   const StatCard = ({ icon, title, value, count }) => {
     return (
       <div className="flex h-[100px] justify-around items-center p-6 border shadow-md rounded-lg">
@@ -88,6 +90,7 @@ function AdminDashboard() {
 
   return (
     <>
+
       <div className="min-h-screen mb-2 border-b rounded-2xl w-full p-6 border-2 shadow-md border-gray-300/40">
         <div className="flex justify-between">
           <div className="flex flex-col h-full text-left">
@@ -168,6 +171,7 @@ function AdminDashboard() {
           </div>
         </div>
       </div>
+
     </>
   );
 }

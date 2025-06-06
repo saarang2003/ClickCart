@@ -18,6 +18,7 @@ import {
 } from "../../store/admin/product-slice/index";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import ReadOnly from "../../components/common/ReadOnly";
 
 const initialFormData = {
   image: null,
@@ -111,6 +112,7 @@ function AdminProducts() {
   console.log(formData, "productList");
 
   return (
+  <ReadOnly readOnly={true}>
     <Fragment>
       <div className="mb-5 w-full flex justify-end">
         <Button onClick={() => setOpenCreateProductsDialog(true)}>
@@ -166,6 +168,7 @@ function AdminProducts() {
         </SheetContent>
       </Sheet>
     </Fragment>
+    </ReadOnly>
   );
 }
 
