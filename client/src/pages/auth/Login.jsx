@@ -29,6 +29,23 @@ function AuthLogin() {
 
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
+      <div className="flex justify-evenly gap-3">
+    <div className="text-center w-[60%] flex flex-col mx-auto gap-2 border-2 border-slate-600">
+      Login Credentials (User)
+      <p>Email: <span className="font-bold">ab@gmail.com </span></p>
+       <p>Password: <span className="font-bold">1234</span></p>
+    </div>
+
+        <div className="text-center w-[75%] flex flex-col mx-auto gap-2 border-2 border-slate-600">
+      Login Credentials (Admin) read only
+      <p>Email: <span className="font-bold">sarang@gmail</span></p>
+       <p>Password: <span className="font-bold">sarang</span></p>
+    </div>
+
+      </div>
+
+
+
       <div className="text-center">
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
           Sign in to your account
