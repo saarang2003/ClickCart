@@ -20,6 +20,7 @@ import { ArrowUpDownIcon } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+import { debounce } from "lodash";
 
 function createSearchParamsHelper(filterParams) {
   const queryParams = [];
@@ -127,12 +128,19 @@ function ShoppingListing() {
     }
   }, [filters]);
 
-  useEffect(() => {
-    if (filters !== null && sort !== null)
-      dispatch(
-        fetchAllFilteredProducts({ filterParams: filters, sortParams: sort })
-      );
-  }, [dispatch, sort, filters]);
+useEffect(() => {
+  const debouncedFetch = debounce(() => {
+    if (filters !== null && sort !== null) {
+      dispatch(fetchAllFilteredProducts({ filterParams: filters, sortParams: sort }));
+    }
+  }, 500); // Delay: 500ms
+
+  debouncedFetch();
+
+  // Cleanup to cancel debounce if component unmounts or dependencies change
+  return () => debouncedFetch.cancel();
+}, [filters, sort, dispatch]);
+
 
   useEffect(() => {
     if (productDetails !== null) setOpenDetailsDialog(true);
