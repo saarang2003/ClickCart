@@ -17,7 +17,7 @@ import {
   fetchProductDetails,
 } from "../../store/shop/product-slice/index";
 import { ArrowUpDownIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
@@ -55,32 +55,32 @@ function ShoppingListing() {
     setSort(value);
   }
 
-  function handleFilter(getSectionId, getCurrentOption) {
-    let cpyFilters = { ...filters };
-    const indexOfCurrentSection = Object.keys(cpyFilters).indexOf(getSectionId);
+  const handleFilter = useCallback((getSectionId, getCurrentOption) => {
+  let cpyFilters = { ...filters };
+  const indexOfCurrentSection = Object.keys(cpyFilters).indexOf(getSectionId);
 
-    if (indexOfCurrentSection === -1) {
-      cpyFilters = {
-        ...cpyFilters,
-        [getSectionId]: [getCurrentOption],
-      };
-    } else {
-      const indexOfCurrentOption =
-        cpyFilters[getSectionId].indexOf(getCurrentOption);
-
-      if (indexOfCurrentOption === -1)
-        cpyFilters[getSectionId].push(getCurrentOption);
-      else cpyFilters[getSectionId].splice(indexOfCurrentOption, 1);
-    }
-
-    setFilters(cpyFilters);
-    sessionStorage.setItem("filters", JSON.stringify(cpyFilters));
+  if (indexOfCurrentSection === -1) {
+    cpyFilters = {
+      ...cpyFilters,
+      [getSectionId]: [getCurrentOption],
+    };
+  } else {
+    const indexOfCurrentOption = cpyFilters[getSectionId].indexOf(getCurrentOption);
+    if (indexOfCurrentOption === -1)
+      cpyFilters[getSectionId].push(getCurrentOption);
+    else cpyFilters[getSectionId].splice(indexOfCurrentOption, 1);
   }
 
-  function handleGetProductDetails(getCurrentProductId) {
+  setFilters(cpyFilters);
+  sessionStorage.setItem("filters", JSON.stringify(cpyFilters));
+}, [filters]);
+
+
+  const  handleGetProductDetails = useCallback((getCurrentProductId) => {
     console.log(getCurrentProductId);
     dispatch(fetchProductDetails(getCurrentProductId));
-  }
+  } , [dispatch]);
+
 
   function handleAddtoCart(getCurrentProductId, getTotalStock) {
     console.log(cartItems);
@@ -120,7 +120,7 @@ function ShoppingListing() {
     setFilters(JSON.parse(sessionStorage.getItem("filters")) || {});
   }, [categorySearchParam]);
 
-  useEffect(() => {
+  useMemo(() => {
     if (filters && Object.keys(filters).length > 0) {
       const createQueryString = createSearchParamsHelper(filters);
       setSearchParams(new URLSearchParams(createQueryString));

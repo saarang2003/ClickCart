@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
@@ -6,6 +7,8 @@ import { Input } from '../../components/ui/input';
 import ShoppingProductTile from '../../components/shopping-view/product-tile';
 import ProductDetailsDialog from '../../components/shopping-view/product-details';
 import { getSearchResults, resetSearchResults } from '../../store/shop/search-slice/index'
+import { addToCart, fetchCartItems } from '../../store/shop/cart-slice';
+import { fetchProductDetails } from '../../store/shop/product-slice';
 
 
 
