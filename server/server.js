@@ -15,9 +15,18 @@ const shopAddressRouter = require('./routes/shop/address-routes.js');
 const shopOrderRouter = require('./routes/shop/order-routes.js');
 const shopSearchRouter = require('./routes/shop/search-routes.js');
 const shopReviewRouter = require('./routes/shop/review-route.js');
+const rateLimiter = require('express-rate-limit');
 
 connectDb();
 const app = express()
+
+const limiter = rateLimiter({
+   max: 300,
+    windowMs: 60 * 60 * 1000,
+    message: "Too many request from this IP"
+})
+
+app.use(limiter);
 
 const PORT  = process.env.PORT || 5000;
 app.use(cookieParser());
