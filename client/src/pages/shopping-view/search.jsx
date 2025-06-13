@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -9,6 +9,7 @@ import ProductDetailsDialog from '../../components/shopping-view/product-details
 import { getSearchResults, resetSearchResults } from '../../store/shop/search-slice/index'
 import { addToCart, fetchCartItems } from '../../store/shop/cart-slice';
 import { fetchProductDetails } from '../../store/shop/product-slice';
+import { debounce } from 'lodash';
 
 
 
@@ -42,18 +43,23 @@ function SearchProducts() {
 
     const { cartItems } = useSelector((state) => state.shopCart);
 
-    useEffect(() => {
-        if (keyword && keyword.trim() !== "" && keyword.trim().length > 3) {
-          setTimeout(() => {
-            setSearchParams(new URLSearchParams(`?keyword=${keyword}`));
-            dispatch(getSearchResults(keyword));
-          }, 1000);
-        } else {
-          setSearchParams(new URLSearchParams(`?keyword=${keyword}`));
-          dispatch(resetSearchResults());
-        }
-      }, [keyword]);
+  const debouncedSearch = useMemo(() => 
+  debounce((kw, dispatchFn, setParams) => {
+    if (kw && kw.trim().length > 3) {
+      setParams(new URLSearchParams(`?keyword=${kw}`));
+      dispatchFn(getSearchResults(kw));
+    } else {
+      setParams(new URLSearchParams(`?keyword=${kw}`));
+      dispatchFn(resetSearchResults());
+    }
+  }, 1000), [] // debounce once
+);
 
+useEffect(() => {
+  debouncedSearch(keyword, dispatch, setSearchParams);
+
+  return () => debouncedSearch.cancel(); // clean up
+}, [keyword, dispatch, setSearchParams]);
 
         // Use the debounce hook
   // const debouncedKeyword = useDebounce(keyword, 1000); // Debounce with 1000ms delay
