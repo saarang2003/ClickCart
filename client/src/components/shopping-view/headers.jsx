@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { HousePlug, LogOut, Menu, ShoppingCart, UserCog } from "lucide-react";
 import {
   Link,
