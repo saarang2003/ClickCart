@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { addNewAddress, editaAddress, fetchAllAddresses } from '../../store/shop/address-slice/index'
+import { addNewAddress, deleteAddress, editaAddress, fetchAllAddresses } from '../../store/shop/address-slice/index'
 import AddressCard from './address-card';
 import {addressFormControls} from '../controls/index'
 import CommonForm from '../common/form';
