@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { FileIcon, UploadCloudIcon, XIcon } from "lucide-react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
