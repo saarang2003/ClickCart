@@ -61,6 +61,7 @@ function AdminProducts() {
             setFormData(initialFormData);
             setOpenCreateProductsDialog(false);
             setCurrentEditedId(null);
+             toast( "Product edited successfully");
           }
         })
       : dispatch(
