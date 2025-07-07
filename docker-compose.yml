@@ -1,0 +1,20 @@
+
+services:
+  backend:
+    container_name: server1
+    build: ./backend
+    ports:
+      - "5000:5000"
+    depends_on:
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/mern
+
+  frontend:
+    container_name: client1
+    build: ./frontend
+    ports:
+      - "5173:3000"
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_API_URL=http://backend:5000
